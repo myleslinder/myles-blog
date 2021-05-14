@@ -1,0 +1,186 @@
+const PersonalCaffeine = ({}) => {
+  return (
+    <svg
+      width="416"
+      height="357"
+      viewBox="0 0 416 357"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <mask
+        id="mask0"
+        mask-type="alpha"
+        maskUnits="userSpaceOnUse"
+        x="89"
+        y="84"
+        width="174"
+        height="199"
+      >
+        <path
+          d="M261.404 135.391L176.915 84.9231L90.2308 135.391V234.132L176.915 281.308L261.404 234.132V135.391Z"
+          fill="#C4C4C4"
+          stroke="black"
+          strokeWidth="1.32692"
+        />
+      </mask>
+      <g mask="url(#mask0)">
+        <rect
+          x="90.2308"
+          y="112.788"
+          width="171.173"
+          height="171.173"
+          fill="url(#pattern0)"
+        />
+      </g>
+      <path
+        d="M261.404 135.391L176.915 84.9231L90.2308 135.391V234.132L176.915 281.308L261.404 234.132V135.391Z"
+        stroke="#B7B8C9"
+        strokeWidth="2.65385"
+      />
+      <circle cx="87.5769" cy="134.019" r="29.1923" fill="white" />
+      <circle
+        cx="87.5769"
+        cy="134.019"
+        r="28.5288"
+        stroke="#676B99"
+        strokeOpacity="0.1"
+        strokeWidth="1.32692"
+      />
+      <circle cx="176.481" cy="29.1923" r="29.1923" fill="white" />
+      <circle
+        cx="176.481"
+        cy="29.1923"
+        r="28.5288"
+        stroke="#676B99"
+        strokeOpacity="0.1"
+        strokeWidth="1.32692"
+      />
+      <path
+        d="M352.962 106.154L261.404 135.421V234.062L352.962 260.077L414 184.199L352.962 106.154Z"
+        stroke="#B7B8C9"
+        strokeWidth="2.65385"
+      />
+      <line
+        x1="276.663"
+        y1="147.288"
+        x2="276.663"
+        y2="224.25"
+        stroke="#B7B8C9"
+        strokeWidth="3.98077"
+      />
+      <circle cx="355.615" cy="106.154" r="29.1923" fill="white" />
+      <circle
+        cx="355.615"
+        cy="106.154"
+        r="28.5288"
+        stroke="#676B99"
+        strokeOpacity="0.1"
+        strokeWidth="1.32692"
+      />
+      <circle cx="355.615" cy="260.077" r="29.1923" fill="white" />
+      <circle
+        cx="355.615"
+        cy="260.077"
+        r="28.5288"
+        stroke="#676B99"
+        strokeOpacity="0.1"
+        strokeWidth="1.32692"
+      />
+      <circle cx="176.481" cy="281.308" r="29.1923" fill="white" />
+      <circle
+        cx="176.481"
+        cy="281.308"
+        r="28.5288"
+        stroke="#676B99"
+        strokeOpacity="0.1"
+        strokeWidth="1.32692"
+      />
+      <circle cx="29.1923" cy="276" r="29.1923" fill="white" />
+      <circle
+        cx="29.1923"
+        cy="276"
+        r="28.5288"
+        stroke="#676B99"
+        strokeOpacity="0.1"
+        strokeWidth="1.32692"
+      />
+      <line
+        x1="374.16"
+        y1="71.4579"
+        x2="394.16"
+        y2="40.4579"
+        stroke="#B7B8C9"
+        strokeWidth="2"
+      />
+      <line
+        x1="60.4"
+        y1="109.8"
+        x2="28.4"
+        y2="85.8"
+        stroke="#B7B8C9"
+        strokeWidth="2"
+      />
+      <line
+        x1="166"
+        y1="92"
+        x2="166"
+        y2="62"
+        stroke="#B7B8C9"
+        strokeWidth="2"
+      />
+      <line
+        x1="188"
+        y1="91"
+        x2="188"
+        y2="61"
+        stroke="#B7B8C9"
+        strokeWidth="2"
+      />
+      <line
+        x1="98.5547"
+        y1="238.832"
+        x2="62.5547"
+        y2="262.832"
+        stroke="#B7B8C9"
+        strokeWidth="2"
+      />
+      <line
+        x1="89.5704"
+        y1="225.821"
+        x2="53.5704"
+        y2="250.821"
+        stroke="#B7B8C9"
+        strokeWidth="2"
+      />
+      <line
+        x1="371.224"
+        y1="221.369"
+        x2="397.224"
+        y2="189.369"
+        stroke="#B7B8C9"
+        strokeWidth="2"
+      />
+      <line
+        x1="175"
+        y1="316"
+        x2="175"
+        y2="357"
+        stroke="#B7B8C9"
+        strokeWidth="2"
+      />
+      <defs>
+        <pattern
+          id="pattern0"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+          height="1"
+        >
+          <use xlinkHref="#image0" transform="scale(0.0025)" />
+        </pattern>
+        <image id="image0" width="400" height="400" href="/myles.png" />
+      </defs>
+    </svg>
+  )
+}
+export default PersonalCaffeine

@@ -6,9 +6,11 @@
     "dev": "next dev",
     "dev:watch": "next-remote-watch ./posts",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "np": "tsc ./lib/scaffold-post"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.1",
     "@tailwindcss/typography": "^0.4.0",
     "gray-matter": "^4.0.3",
     "next": "10.1.3",
