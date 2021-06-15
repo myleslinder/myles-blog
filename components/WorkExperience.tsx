@@ -7,8 +7,7 @@ const previousJobPositions = [
       {
         title: 'Partner, Technology Operations',
         dateLine: 'October 2018 - May 2021',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo.',
+        description: '',
       },
     ],
     logoUrl: '/el-logo.png',
@@ -26,14 +25,12 @@ const previousJobPositions = [
       {
         title: 'Senior Manager, Digital Products & Strategy',
         dateLine: 'May 2018 - October 2018',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo.',
+        description: '',
       },
       {
         title: 'Manager, Digital Products & Strategy',
         dateLine: 'February 2017 - April 2018',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo.',
+        description: '',
       },
     ],
     dateLine: 'May 2018 - October 2018',
@@ -50,14 +47,12 @@ const previousJobPositions = [
       {
         title: 'Senior Consultant, Strategy & Technology',
         dateLine: 'February 2016 - February 2017',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo.',
+        description: '',
       },
       {
         title: 'Consultant, Strategy & Technology',
         dateLine: 'February 2015 - February 2016',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo.',
+        description: '',
       },
     ],
     logoUrl: '/konrad-logo.png',
@@ -85,7 +80,7 @@ const JobPosition = ({ position, dateLine, description }) => {
 
 const WorkExperience = () => {
   return (
-    <div>
+    <div className="w-full">
       {previousJobPositions.map(({ logoUrl, company, positions, style }) => (
         <div
           key={company}
