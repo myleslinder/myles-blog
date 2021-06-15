@@ -19,7 +19,7 @@ const LocationPhoto = ({ location, imgUrl, top = false }) => {
           <p className="text-xs font-semibold">{location}</p>
         </div>
       </div>
-      <img src={imgUrl} className="rounded-lg" />
+      <img src={imgUrl} className="rounded-lg" alt="" />
     </div>
   )
 }
@@ -32,6 +32,7 @@ export const PhotoGrid = () => {
         <img
           src="/myles.png"
           className="block w-36 sm:w-32 rounded-lg p-3 sm:p-0 bg-white -translate-y-16 transform sm:translate-y-0"
+          alt="A picture of myles' face"
         />
       </div>
       <div className="flex sm:flex-col flex-col-reverse pt-8">
@@ -53,51 +54,6 @@ export const PhotoGrid = () => {
         <LocationPhoto
           location="Humantay Lake, Peru"
           imgUrl="/salkantay-lake.jpeg"
-          top
-        />
-      </div>
-    </div>
-  )
-}
-
-export const PhotoGrid2 = () => {
-  const [isMobile, setIsMobile] = useState(false)
-
-  useMobileResize([setIsMobile])
-
-  const heroImageClasses = isMobile ? '' : 'absolute top-1/2 z-30'
-  return (
-    <div className="relative w-full flex-col flex">
-      <div className="flex justify-center items-center translate-y-4 transform z-30">
-        <img
-          src="/myles.png"
-          className={`w-32 rounded-lg  ${heroImageClasses}`}
-        />
-      </div>
-      <div className={`${isMobile ? 'w-full' : 'w-64'} top-24 right-60 z-20`}>
-        <LocationPhoto
-          location="Humantay Lake, Salkantay, Peru"
-          imgUrl="/salkantay-lake.jpeg"
-        />
-      </div>
-      <div
-        className={`${
-          isMobile ? 'w-full' : 'w-52'
-        } -bottom-24 right-0 z-0 rounded-lg`}
-      >
-        <LocationPhoto
-          imgUrl="/toubkal-summit.jpeg"
-          location="Mount Toubkal, Morocco"
-        />
-      </div>
-      <div
-        className={`${
-          isMobile ? 'w-full' : 'w-52'
-        } top-0 right-12 z-10 rounded-lg`}
-      >
-        <LocationPhoto
-          imgUrl="/whistler.jpeg"
-          location="Whistler, BC, Canada"
           top
         />
       </div>

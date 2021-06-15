@@ -8,7 +8,7 @@ export const Navigation = () => {
         <Link href="/">
           <a>
             <span className="hidden">Home</span>
-            <img alt="" src="/M-logo.svg" width="65" />
+            <img alt="M-Logo" src="/M-logo.svg" width="65" />
           </a>
         </Link>
       </div>

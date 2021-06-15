@@ -10,6 +10,7 @@ const App = ({ Component, pageProps }: AppProps) => (
     <Head>
       <link rel="icon" href="/M-logo.svg" />
       <title>Myles Linder</title>
+      <meta name="description" content="Myles Linder's personal site"></meta>
     </Head>
     <div className="max-w-4xl mx-auto sm:px-12 px-6 lg:max-w-6xl">
       <Navigation />

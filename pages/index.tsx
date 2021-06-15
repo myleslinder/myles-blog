@@ -15,7 +15,13 @@ const HomeHero = () => {
         className="text-4xl sm:text-5xl font-bold my-6"
         style={{ lineHeight: '3.5rem' }}
       >
-        <span className="text-4xl sm:text-5xl block mb-4">👋</span>
+        <span
+          role="img"
+          aria-label="Waving hand emoji"
+          className="text-4xl sm:text-5xl block mb-4"
+        >
+          👋
+        </span>
         <span className="bg-blue-100 p-2">Hey, I'm Myles</span>
         <span className="block pt-4 text-3xl sm:text-4xl text-gray-500">
           I like to solve problems with technology.
@@ -106,11 +112,13 @@ const Project = () => {
       <img
         src="/groups-illustration-stroke.png"
         className="absolute left-0 top-10 w-20"
+        alt=""
       />
 
       <img
         src="/groups-illustration-fill.png"
         className="absolute bottom-0 right-0 w-96 rounded-b-lg"
+        alt=""
       />
     </div>
   )

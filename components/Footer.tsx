@@ -97,19 +97,19 @@ const SocialLinks = ({ isOpen, isVisible, onOpenRequest }) => {
             target="_blank"
           >
             <span className="hidden">LinkedIn</span>
-            <img src="/LinkedInIcon.svg" width="18" />
+            <img src="/LinkedInIcon.svg" width="18" alt="LinkedIn Logo" />
           </a>
         </div>
         <div className="px-4">
           <a href="https://open.spotify.com/user/myleslinder" target="_blank">
             <span className="hidden">Spotify</span>
-            <img src="/SpotifyIcon.svg" width="18" />
+            <img src="/SpotifyIcon.svg" width="18" alt="Spotify Logo" />
           </a>
         </div>
         <div className="px-4">
           <a href="https://github.com/myleslinder" target="_blank">
             <span className="hidden">Github</span>
-            <img src="/GithubIcon.svg" width="18" />
+            <img src="/GithubIcon.svg" width="18" alt="Github Logo" />
           </a>
         </div>
         {/* <div className="px-4">
