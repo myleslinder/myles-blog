@@ -28,14 +28,17 @@ export const PhotoGrid = () => {
   // 2 cols
   return (
     <div className="flex justify-between relative flex-col sm:flex-row sm:pt-0 pt-8 gap-x-8">
-      <div className="absolute z-30 flex justify-center sm:items-center items-start w-full h-full sm:py-16 py-8">
+      <div className="absolute flex justify-center sm:items-center items-start w-full h-full sm:py-16 py-8">
         <img
           src="/myles.png"
           className="block w-36 sm:w-32 rounded-lg p-3 sm:p-0 bg-white -translate-y-16 transform sm:translate-y-0"
           alt="A picture of myles' face"
         />
       </div>
-      <div className="flex sm:flex-col flex-col-reverse pt-8">
+      <div
+        className="flex sm:flex-col flex-col-reverse pt-8"
+        style={{ zIndex: -1 }}
+      >
         <div className="py-8">
           <LocationPhoto
             imgUrl="/whistler.jpeg"
@@ -50,7 +53,7 @@ export const PhotoGrid = () => {
           />
         </div>
       </div>
-      <div className="sm:translate-y-8 sm:transform">
+      <div className="sm:translate-y-8 sm:transform" style={{ zIndex: -1 }}>
         <LocationPhoto
           location="Humantay Lake, Peru"
           imgUrl="/salkantay-lake.jpeg"

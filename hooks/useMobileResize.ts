@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export default function useMobileResize(handlers: [any], size = 1000) {
+export default function useMobileResize(handlers: any[], size = 1000) {
   const handleResize = () => {
     let isMobile = window.innerWidth < size
     handlers.forEach(handler => handler(isMobile))
