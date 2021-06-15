@@ -67,7 +67,7 @@ export default function Home({ posts }) {
               technology, and behaviour (especially behavioural economics).
             </p>
           </div>
-          <div>
+          <div className="lg:transform lg:-translate-y-20">
             <PhotoGrid />
           </div>
         </Section>
