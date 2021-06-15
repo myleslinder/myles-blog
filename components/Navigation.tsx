@@ -23,14 +23,14 @@ export const Navigation = () => {
             <a>Blog</a>
           </Link>
         </li> */}
-        <li>
+        {/* <li>
           <button className="px-6 border-blue-600 rounded-lg border py-2 text-blue-600 flex justify-center items-center">
             <a href="/Myles-Linder-Resume.pdf" target="_blank">
               Resume
             </a>
             <ExternalLinkIcon className="h-4 w-4 ml-2" />
           </button>
-        </li>
+        </li> */}
       </ul>
     </nav>
   )
