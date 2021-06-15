@@ -1,0 +1,154 @@
+---
+title: Groups for Spotify
+description: Building an app to The main goal is to be able to allow passively sharing music with your friends, that they can actively discover
+---
+
+## Lets Build an App
+
+The main goal is to be able to :
+
+> _Passively_ share music with your friends, that they can _actively_ discover
+
+Passively share - I shouldn't have to do anything more than what i'm already doing to be able to share with my friends
+Actively discover - Songs my friends shared should be available when I want them
+
+The ability to share to a specific group would be amazing. For now, making the UX tradeoff though to have it be basically Twitter where you share to everyone (all of your groups). This mirrors the IG song share experience - I wonder what percentage of spotify songs shared on instagram stories were to close friends group?
+
+What's in a group? Think iMessage groups - i'm in lots of groups with overlap but each group is unique based on who's in it. Think of groups like channels in a Slack or Discord, they're "association" groups - they emerge around topics or sub-groups.
+
+Also we have no way to create a synchronous feedback loop the way twitter or something does for when the rest of your group interacts with your shares.
+
+We use the playlist cover, regenerated each week to display fun feedback - doubles the reason to check the playlist each week (dispo example?)
+
+Liked Songs being reverse chronological where every other playlist is chronological - this and ease of adding to, make it likely way more used (no matter how many 'playlist people' there are). This brings a second question around the friction of adding a song to a playlist, it's so many taps
+
+The issue with collaborative playlists - they have the same chronological issue but they're also entirely static and they're basically append-only. Also again, the playlist adding friction.
+
+This brings us to Spotify Playlists not having a notion of time, a big missing piece. The only ones who have the notion of time are the spotify owned algo playlists. There's no delineation between the static and dynamic playlists which would actually be nice.
+
+The algo playlists are designed like a filter based on things we explicitly or implicitly follow or express interest in. If they generated a typical feed of the things we cared about it would be overwhelming, but it also draws to the notion of that you can only discover whats new - see Medium post on that topic.
+
+This brings us to the age-old filter, our friends. It's the OG music discovery. Hypemachine callback.
+
+UI would be icon on left side of bottom when song is focused in full screen and move output selector to middle. The UI is an overlay just like output selector but for groups (dynamic playlists). Alternative is next to the heart icon.
+
+Under the hood it's basically a new UI over collaborative playlists, setting collab playlists reverse chronological, and deleting old songs (past some reasonable date, like 30 days). I guess it's not quite collab playlists because those would show your own songs (although those are in your own twitter feed as well).
+
+Spotify A/B tested this Enhance feature that would add songs to your playlist weekly (letting you remove them by turning off "enhance"). This features was available on a collaborative playlist.
+
+Spotify enhanced collaborative playlists would be so close and let spotify generate new music based on your groups collective tastes! the problem is just clearing out old songs, making it easier to add songs - you don't have to deal with songs you added because spotify does song attribution so you at least know it's yours (like a tweet). Reverse chrono is available already it just needs to default to that setting for collaborative, or enhanced, or both playlists. And with reverse chronological clearing out old songs becomes less important as a UX piece but kind of because it eliminates shuffle but more of a technical issue for any groups of a decent size.
+
+Playlists are the core unit of spotify basically (not artists, maybe albums is up there and soon to be with podcast seasons, but they're the same as playlist if you squint). They populate the recent list at the top of home, they're the first thing thats available in your library, and in Search they're whats available under the grid categories. Spotify makes it really easy to consume playlists - they're everywhere. But they make it incredibly difficult to work with them. When playing a song the feature is so far hidden under the worlds most difficult to reach elipses and then relegated to below the fold on the subsequent modal.
+
+## Next Steps
+
+1. Need to design the front-end of the app and it's behavior in Figma
+2.
+
+Going to do a nextjs app and use next-auth for spotify auth and sessions - this will store the tokens in the db so that they're still available for the background jobs but doesn't require an additional account creation for the end user.
+Having groups running at different times is a good way to effectively load balance although it's non-deterministic and in theory could still result in each group having the same time, unless there is a capacity per.
+The option exists to charge something trivial like $2/mo to make a group larger than 5 people and to pick your own update d/t (for free accounts it gets auto set based on availability)
+It really seems like the best way to do this is on AWS as a lambda can run for up to 900 seconds which would?
+The alternative is to just host a node server on Heroku (possibly replit?) that is responsible for the bulk jobs and use a simple CF worker trigger to ping the server hourly to run whatever bulk updates are in the db for that hour. In either case I could spin up child processes and shit to parallelize the processing for groups.
+
+Another way to do this is entirely on AWS with a cron that triggers a lambda which looks at all the groups at that time that need to be updated and then uses SQS or SNS or something to have a lambda run per group. It seems SNS is the answer because it's async.
+Okay so app front-end on next, the rest on AWS with lambda, dynamo, SNS, etc. The next-js app first just needs to be able to work with the dynamo records before any of the AWS orchestration logic needs to be set up. The alternative is to set all that up first and just manually craft some db inputs.
+seems actually using functions as triggers on records isn't a bad play - the cron just flips a 'needs update' flag that fires the listener (and that same flag can get flipped when a new user joins the group)
+okay a new alternative is to use firebase for the entire thing because notification service isn't needed as triggers can be used.
+
+### Sign Up/Log In With Spotify
+
+### Create a Group
+
+- name group
+- set group image to be used for playlist image
+  - would be really cool to let people upload an image and then generatively overlay something like what spotify does for daily mix ![[Screen Shot 2021-03-09 at 11.26.57 AM.png]]
+- set description
+- set if members can invite others (if go this route then there needs to be a notice when free group size limit is hit to request ownership of ask owner to upgrade)
+- choose update day/time
+- (post create step) show invite link for copy/paste
+
+### Join a Group
+
+- you just need a groups unique id to join and this is like a modal where you enter it
+- should show group details (name and owner) with confirmation of join step
+- when new user joins it re-builds the playlist for the week with that user (no need to re-fetch existing users songs, just new user, and update all member playlists)
+
+### View Group List
+
+- Delineated by groups I own or am in
+- shows name, image, description, member count, update d/t
+
+### View Group
+
+- show group details (name, image, description, update d/t (possibly next update relative date))
+- show group members
+- can get invite link
+- if owner
+  - option edit (same options as create)
+    - how to handle changing playlist data for users as it could overwrite their modifications? I think it's fine to overwrite as this group is the "owner" of that playlist
+    - how to handle allowing a change in update d/t? I think ultimately it doesn't matter because each week update is treated atomically so it only cares about the 7 preceding days and if it ends up with overlap due to a change then no biggie
+  - option to delete
+  - option to re-assign owner
+  - option to leave (force re-assign owner)(this has payment considerations)
+  - option to remove someone
+- if member
+  - option to leave
+  - option to request ownership
+- later will show weekly lists and group stats
+  - contribution percents, top artists, most songs contributed then added to other members libraries
+- need considerations for if playlist is deleted
+  - we could consider this effectively 'leaving' the group
+  - leaving a group will change a status in the db and not delete stuff because that users data will be reflected in weekly lists
+
+### Playlist Creation
+
+- When a new group is created it will be populated with the d/t to 7 days before the d/t even if the current date is after the d/t
+- When a new user joins a group a playlist is created for them (empty)
+  - This then kicks off a request to re-builds the playlists for the group (which now includes the new user) so as soon as the second user joins the group the playlist populates for both users, and so on
+
+### Playlist Updates
+
+- For each user in the group get the songs added to 'liked' from the d/t to the last d/t
+- For each user in the group, replacing all songs from the week prior, add to the playlist all the songs from that week for all other users in the group
+
+### Data Model
+
+Users
+
+- id
+- spotify user id
+- auth details (refresh token)
+
+Groups
+
+- id
+- name
+- image?
+- members []users
+- owner - user
+
+Playlists
+
+- group - group
+- user - user
+
+Songs
+
+- user - user
+- spotify song id
+- date (consideration for this)
+
+For this to work with CF Workers - i'll set up one worker that will have two cron triggers like 30 mins apart or something.
+
+I basically need to do 3 things back-to-back-to-back:
+
+1. Refresh the authorization with the refresh token
+2. Fetch all the songs the user has added to their liked songs in the past 7 days
+3. Replace the users playlist with the new songs list
+
+---
+
+Can add a little electron desktop app - that lets you control playback and shows some reco's
+
+possible to add settings and options for allowing other users in the group to see what you're listening to - spotify desktop app style

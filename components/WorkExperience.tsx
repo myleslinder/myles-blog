@@ -72,9 +72,9 @@ const previousJobPositions = [
 const JobPosition = ({ position, dateLine, description }) => {
   return (
     <div className="bg-white p-6 rounded-lg flex flex-col my-6">
-      <div className="flex justify-between flex-grow py-4 items-center">
-        <p className="font-bold text-md">{position}</p>
-        <p className="font-mono text-blue-700 text-xs">{dateLine}</p>
+      <div className="flex justify-between flex-grow py-4 md:items-center md:flex-row flex-col">
+        <p className="font-bold text-md md:pb-0 pb-4">{position}</p>
+        <p className="font-mono text-blue-700 text-xs ">{dateLine}</p>
       </div>
       <div className="flex-shrink" style={{ flexBasis: '60%' }}>
         <p className="text-sm leading-loose">{description}</p>
@@ -84,21 +84,29 @@ const JobPosition = ({ position, dateLine, description }) => {
 }
 
 const WorkExperience = () => {
-  return previousJobPositions.map(({ logoUrl, company, positions, style }) => (
-    <div key={company} style={style} className="bg-black p-12 rounded-lg my-8">
-      <div className="pb-12">
-        <img src={logoUrl} alt={`${company} logo`} style={{ width: 250 }} />
-      </div>
-      {positions.map(({ title, dateLine, description }) => (
-        <JobPosition
-          key={title}
-          position={title}
-          dateLine={dateLine}
-          description={description}
-        ></JobPosition>
+  return (
+    <div>
+      {previousJobPositions.map(({ logoUrl, company, positions, style }) => (
+        <div
+          key={company}
+          style={style}
+          className="bg-black px-6 py-12 md:px-12 rounded-lg my-8"
+        >
+          <div className="pb-12">
+            <img src={logoUrl} alt={`${company} logo`} style={{ width: 250 }} />
+          </div>
+          {positions.map(({ title, dateLine, description }) => (
+            <JobPosition
+              key={title}
+              position={title}
+              dateLine={dateLine}
+              description={description}
+            ></JobPosition>
+          ))}
+        </div>
       ))}
     </div>
-  ))
+  )
 }
 
 export default WorkExperience

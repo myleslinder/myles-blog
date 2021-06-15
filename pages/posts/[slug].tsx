@@ -9,6 +9,8 @@ import path from 'path'
 import Layout from '../../components/Layout'
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils'
 
+import { ArrowLeftIcon } from '@heroicons/react/outline'
+
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
 // to handle import statements. Instead, you must include components in scope
@@ -27,20 +29,28 @@ export default function PostPage({ source, frontMatter }) {
   return (
     <>
       <header>
+        <Head>
+          <title>{frontMatter.title} - Myles Linder</title>
+        </Head>
         <nav>
-          <Link href="/">
-            <a>👈 Go back home</a>
+          <Link href="/posts">
+            <a className="flex items-center my-2 text-blue-600">
+              <ArrowLeftIcon className="w-4 h-4 inline mr-2" />
+              <span className="">View all posts</span>
+            </a>
           </Link>
         </nav>
       </header>
       <Layout>
-        <div className="post-header">
-          <h1>{frontMatter.title}</h1>
+        <div className="post-header pb-5">
+          <h1 className="text-6xl font-semibold py-4">{frontMatter.title}</h1>
           {frontMatter.description && (
-            <p className="description">{frontMatter.description}</p>
+            <p className="description text-lg text-gray-500">
+              {frontMatter.description}
+            </p>
           )}
         </div>
-        <div className="prose lg:prose-xl">{content}</div>
+        <div className="prose lg:prose-xl pt-4">{content}</div>
       </Layout>
     </>
   )

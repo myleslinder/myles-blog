@@ -1,0 +1,20 @@
+---
+title: Today I Learned
+description: Here lives ideas small bite-sized things I learned
+---
+
+`mv` accepts regex
+
+RequestAnimationFrame runs in the spot in the event loop just before the rendering and painting actually happens and each callback in the queue gets called, but no callbacks added during this are called. Tasks run in the event loop on the "far side" of the loop and always happen after render, paint, etc and only a single Task is dequeued per cycle and no callbacks added this cycle are called. Microtasks happen every time the stack empties and the each cb in the queue gets called including cbs added during the execution.
+
+A ! before a link in markdown will try to turn it into an image but will render the text itself if no image is found
+
+log git remote branches just add -r flag to git branch
+
+```
+typeof window === undefined
+```
+
+typeof window === undefined is a legimate way to check if js running on server
+
+git commit --amend will add the staging area to the previous commit and give you an opportunity to update the message (with an empty staging area this just lets you update the message)
