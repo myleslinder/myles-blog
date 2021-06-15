@@ -72,6 +72,7 @@ const NavigationMenu = () => {
     return (
       <>
         <button onClick={() => setIsOpen(true)}>
+          <span className="hidden">Menu</span>
           <MenuIcon className="h-7 w-7" />
         </button>
         <Dialog
@@ -82,6 +83,7 @@ const NavigationMenu = () => {
         >
           <div className="w-full flex flex-col items-end">
             <button onClick={close}>
+              <span className="hidden">Close</span>
               <XIcon className="h-7 w-7" />
             </button>
             <Menu

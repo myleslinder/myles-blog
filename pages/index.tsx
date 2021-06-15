@@ -73,13 +73,16 @@ export default function Home({ posts }) {
               technology, and behaviour (especially behavioural economics).
             </p>
           </div>
-          <div className="lg:transform lg:-translate-y-20">
+          <div
+            className="lg:transform lg:-translate-y-20"
+            style={{ zIndex: -1 }}
+          >
             <PhotoGrid />
           </div>
         </Section>
         <Section
           title="Experience"
-          subtitle="My professional work experience, in reverse chronological order"
+          subtitle="A subset of my professional work experience, in reverse chronological order"
         >
           <WorkExperience />
         </Section>
