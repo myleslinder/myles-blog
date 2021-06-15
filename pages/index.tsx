@@ -48,19 +48,19 @@ export default function Home({ posts }) {
       </div> */}
       <div>
         <Section title="About Me" subtitle="Lets get to know each other">
-          <div className="lg:max-w-md flex flex-col gap-y-10">
-            <p>
+          <div className="lg:max-w-md flex flex-col">
+            <p className="py-4">
               I was born and raised in Vancouver, Canada where I grew to love
               the mountains, especially skiing and hiking. After university I
               moved to Toronto shifting my attention to different interests -
               namely eating and drinking.
             </p>
-            <p>
+            <p className="py-4">
               I'm currently living in Vancouver, but I'm not sure where I'll be
               settling in the near future. My educational background is in
               business, however I've worked as a PM, designer, and developer.
             </p>
-            <p>
+            <p className="py-4">
               Most recently, I was the co-founder and technology lead of a
               software consulting business focused on CRM technologies with a
               few long-time friends. I'm passionate about learning/education,
