@@ -13,8 +13,8 @@ const previousJobPositions = [
     logoUrl: '/el-logo.png',
     style: {
       backgroundImage: 'url("/el-graphic.png")',
-      backgroundPosition: '110% -37px',
-      backgroundSize: '501px',
+      backgroundPosition: '180% -30px',
+      backgroundSize: '90%',
       backgroundRepeat: 'no-repeat',
       backgroundColor: '#232323',
     },

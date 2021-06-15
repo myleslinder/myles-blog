@@ -24,11 +24,11 @@ export const Navigation = () => {
           </Link>
         </li> */}
         <li>
-          <button className="px-6 border-blue-600 rounded-lg border py-2 text-blue-600 flex justify-center items-center gap-x-3">
+          <button className="px-6 border-blue-600 rounded-lg border py-2 text-blue-600 flex justify-center items-center">
             <a href="/Myles-Linder-Resume.pdf" target="_blank">
               Resume
             </a>
-            <ExternalLinkIcon className="h-4 w-4" />
+            <ExternalLinkIcon className="h-4 w-4 ml-2" />
           </button>
         </li>
       </ul>
