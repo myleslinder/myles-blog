@@ -14,9 +14,8 @@ const App = ({ Component, pageProps }: AppProps) => (
     <div className="max-w-4xl mx-auto sm:px-12 px-6 lg:max-w-6xl">
       <Navigation />
       <Component {...pageProps} />
+      <Footer />
     </div>
-
-    <Footer />
   </div>
 )
 

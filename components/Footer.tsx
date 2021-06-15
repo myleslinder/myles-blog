@@ -26,7 +26,7 @@ export const Footer = () => {
 
   return (
     <div
-      className={`z-40 bg-white flex justify-between items-center sticky h-20 bottom-0 left-0 px-8 ${
+      className={`z-40 bg-white flex justify-between items-center sticky h-20 bottom-0 left-0 ${
         isSocialOpen ? 'flex-row-reverse' : 'flex-row'
       }`}
     >

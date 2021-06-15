@@ -9,21 +9,29 @@ import WorkExperience from '../components/WorkExperience'
 
 const HomeHero = () => {
   return (
-    <div className="flex flex-col justify-between h-full md:flex-row md:py-36 sm:py-12">
-      <div className="">
-        {/* <p className="mb-6 font-mono text-xs">Let's get to know each other</p> */}
-        <h1 className="text-3xl sm:text-4xl font-bold my-6 leading-normal">
-          <span className="text-4xl sm:text-5xl block mb-4">👋</span>
-          <span className="bg-blue-100 p-1 mr-2">Hey, I'm Myles</span>I
-          overthink things about behaviour, products, and technology
-        </h1>
-        <p className="text-xl sm:text-2xl font-semibold mb-6 leading-relaxed text-gray-500">
-          I overthink things about behaviour, products, and technology
-        </p>
-        {/* <button>Something here</button> */}
-      </div>
-
-      {/* <PersonalCaffeine /> */}
+    <div className="flex flex-col py-12">
+      {/* <p className="mb-6 font-mono text-xs">Let's get to know each other</p> */}
+      <h1
+        className="text-4xl sm:text-5xl font-bold my-6"
+        style={{ lineHeight: '3.5rem' }}
+      >
+        <span className="text-4xl sm:text-5xl block mb-4">👋</span>
+        <span className="bg-blue-100 p-2">Hey, I'm Myles</span>
+        <span className="block pt-4 text-3xl sm:text-4xl text-gray-500">
+          I like to solve problems with technology.
+        </span>
+      </h1>
+      <p className="sm:text-md font-medium mb-12 leading-relaxed">
+        I have the most fun when working cross-functionally across product,
+        design, and development. I'm especially interested in human behavior,
+        why do we do the things we do. I love learning new things and helping
+        others learn.
+      </p>
+      {/* <div>
+        <button className="text-lg px-6 border-blue-600 rounded-lg border py-2 text-blue-600 flex justify-center items-center gap-x-3">
+          Get In Touch
+        </button>
+      </div> */}
     </div>
   )
 }
@@ -40,30 +48,39 @@ export default function Home({ posts }) {
       </div> */}
       <div>
         <Section title="About Me" subtitle="Lets get to know each other">
-          <p className="lg:max-w-md">
-            - I was born and raised in Vancouver, Canada where I grew to love
-            the mountains, especially skiing and hiking. After university I
-            moved to Toronto shifting my attention to different interests -
-            namely eating and drinking. I'm back on the west coast these days,
-            but not sure where I'll be settling in the near future. - My
-            educational background is in business, however I've worked as a PM,
-            designer, and developer. Most recently, I was the co-founder and
-            technology lead of a software consulting business focused on CRM
-            technologies with a few long-time friends, however we've just exited
-            the business. - I'm passionate about learning/education, technology,
-            and behaviour (especially behavioural economics). - I read a fair
-            amount (mostly non-fiction) and I'm always looking to discuss books
-            if anyone is interested! My most recent reads: When Breathe Becomes
-            Air, Dune, Seveneves, Think Again, and Thinking in Bets.
-          </p>
+          <div className="lg:max-w-md flex flex-col gap-y-10">
+            <p>
+              I was born and raised in Vancouver, Canada where I grew to love
+              the mountains, especially skiing and hiking. After university I
+              moved to Toronto shifting my attention to different interests -
+              namely eating and drinking.
+            </p>
+            <p>
+              I'm currently living in Vancouver, but I'm not sure where I'll be
+              settling in the near future. My educational background is in
+              business, however I've worked as a PM, designer, and developer.
+            </p>
+            <p>
+              Most recently, I was the co-founder and technology lead of a
+              software consulting business focused on CRM technologies with a
+              few long-time friends. I'm passionate about learning/education,
+              technology, and behaviour (especially behavioural economics).
+            </p>
+          </div>
           <div>
             <PhotoGrid />
           </div>
         </Section>
-        <Section title="Experience" subtitle="some experience subtitle">
+        <Section
+          title="Experience"
+          subtitle="My professional work experience, in reverse chronological order"
+        >
           <WorkExperience />
         </Section>
-        <Section title="Projects" subtitle="some projects subtitle">
+        <Section
+          title="Projects"
+          subtitle="Some things I'm working on - just for fun"
+        >
           <Project />
         </Section>
       </div>
@@ -77,7 +94,7 @@ const Project = () => {
       <p className="md:text-5xl text-3xl font-bold ">
         Groups for <span className="text-green-600">Spotify</span>
       </p>
-      <p>Playlists updated weekly with the liked songs from your friends</p>
+      <p>Playlists updated weekly with liked songs from your friends</p>
       <div>
         <button
           className="disabled:cursor-not-allowed uppercase font-semibold tracking-widest text-xs rounded-3xl px-8 py-2 focus:outline-none bg-gray-300 border-gray-400 border-2 text-gray-400"
@@ -93,7 +110,7 @@ const Project = () => {
 
       <img
         src="/groups-illustration-fill.png"
-        className="absolute bottom-0 right-0 w-96"
+        className="absolute bottom-0 right-0 w-96 rounded-b-lg"
       />
     </div>
   )

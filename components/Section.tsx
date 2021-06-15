@@ -8,7 +8,7 @@ const Section = ({ title, subtitle, children, linkTitle = null }) => {
   return (
     <section className="py-12" id={title.toLowerCase().replace(' ', '-')}>
       <h3 className="text-5xl sm:text-6xl font-bold pt-10 pb-4">{title}</h3>
-      <p className="pb-8">{subtitle}</p>
+      <p className="pb-8 font-semibold">{subtitle}</p>
       <div className="flex justify-between lg:flex-row flex-col gap-y-12 lg:gap-x-12">
         {children}
       </div>
