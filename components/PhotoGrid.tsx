@@ -27,7 +27,7 @@ const LocationPhoto = ({ location, imgUrl, top = false }) => {
 export const PhotoGrid = () => {
   // 2 cols
   return (
-    <div className="flex justify-between relative flex-col sm:flex-row sm:pt-0 pt-8">
+    <div className="flex justify-between relative flex-col sm:flex-row sm:pt-0 pt-8 gap-x-8">
       <div className="absolute z-30 flex justify-center sm:items-center items-start w-full h-full sm:py-16 py-8">
         <img
           src="/myles.png"
