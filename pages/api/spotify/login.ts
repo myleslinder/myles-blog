@@ -5,6 +5,7 @@ const scopes: SpotifyAuthScope[] = [
   'user-library-read',
   'playlist-modify-private',
   'ugc-image-upload',
+  'user-read-playback-state',
 ]
 
 const buildRedirectUrl = () => {

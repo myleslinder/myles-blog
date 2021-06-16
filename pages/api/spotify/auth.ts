@@ -6,6 +6,8 @@ const BASE_URL = process.env.BASE_URL
 const SPOTIFY_TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token'
 const REDIRECT_URI = '/api/spotify/auth'
 
+// TODO: error handling
+
 const getCurrentUserProfile = async (
   accessToken: string,
 ): Promise<SpotifyUser> => {
@@ -15,6 +17,19 @@ const getCurrentUserProfile = async (
     headers: { Authorization: `Bearer ${accessToken}` },
   })
   return meRes.json()
+}
+
+const getUserPlayback = async (
+  accessToken: string,
+): Promise<SpotifyPlayback> => {
+  const SPOTIFY_PLAYER_ENDPOINT = 'https://api.spotify.com/v1/me/player'
+  const url = new URL(SPOTIFY_PLAYER_ENDPOINT)
+  // url.searchParams.append('market', 'from-token')
+  url.searchParams.append('additional_types', 'track,episode')
+  let playerRes = await fetch(url, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+  return playerRes.json()
 }
 
 const handleInitialAuthorization = async (
@@ -32,25 +47,22 @@ const handleInitialAuthorization = async (
     process.env.SPOTIFY_CLIENT_SECRET,
   )
 
-  try {
-    let authRes = await fetch(paramsUrl.toString(), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    })
-    let json = await authRes.json()
+  let authRes = await fetch(paramsUrl.toString(), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  })
+  let { access_token } = await authRes.json()
+  //let spotifyUser = await getCurrentUserProfile(access_token)
+  const r = await getUserPlayback(access_token)
 
-    let spotifyUser = await getCurrentUserProfile(json.access_token)
-
-    res.redirect(301, `/?${spotifyUser.id}`)
-  } catch (e: any) {
-    console.log(e)
-  }
+  console.log(`r ${JSON.stringify(r, null, 2)}`)
+  res.redirect(301, `/`)
 }
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-  return handleInitialAuthorization(
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  return await handleInitialAuthorization(
     res,
     req.query.code as string,
     `${BASE_URL}${REDIRECT_URI}`,
@@ -88,4 +100,36 @@ type SpotifyImageObject = {
   height: number
   url: string
   width: number
+}
+
+type SpotifyPlayback = {
+  timestamp: number
+  device: {
+    id: string
+    is_active: boolean
+    is_restricted: boolean
+    name: string
+    type: string
+    volume_percent: number
+  }
+  progress_ms: number
+  is_playing: boolean
+  currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown'
+  item: SpotifyTrackObject | SpotifyEpisodeObject | null
+  shuffle_state: boolean
+  repeat_state: 'off' | 'track' | 'context'
+  context: SpotifyContextObject | null
+}
+
+type SpotifyTrackObject = {}
+
+type SpotifyEpisodeObject = {}
+
+type SpotifyContextObject = {
+  external_urls: {
+    spotify: string
+  }
+  href: string
+  type: string
+  uri: string
 }
