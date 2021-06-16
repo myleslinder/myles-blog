@@ -49,6 +49,26 @@ const currentWeatherReducer = (
   }
 }
 
+// NOTE - these `handleX` functions could instead take two params and bind
+// i'm unsure if there are performance differences between the two approaches
+// the purpose is to be able to have them outside of my hook body for simplicity and readability
+
+const handleStart = dispatch => () => {
+  const weatherLoadingOptions = [
+    'Scanning the skies...',
+    'Calibrating weather balloons...',
+    'Browsing the horizon...',
+  ]
+
+  dispatch({
+    type: 'STARTED',
+    loadingText:
+      weatherLoadingOptions[
+        getRandomNumFromRange(0, weatherLoadingOptions.length)
+      ],
+  })
+}
+
 const handleSuccess = dispatch => (json: OpenWeatherCurrentResponse) => {
   const formattedDescription = formatDescription(json.weather[0].description)
   const formattedTemp = formatTemp(json.main.temp)
@@ -80,12 +100,6 @@ const fetchCurrentWeather = async (onRes, onRej) => {
   }
 }
 
-const weatherLoadingOptions = [
-  'Scanning the skies...',
-  'Calibrating weather balloons...',
-  'Browsing the horizon...',
-]
-
 export default function useCurrentWeather(): CurrentWeather {
   const [state, dispatch] = useReducer(currentWeatherReducer, {
     status: 'IDLE',
@@ -94,17 +108,12 @@ export default function useCurrentWeather(): CurrentWeather {
     error: null,
   })
 
+  const start = handleStart(dispatch)
   const success = handleSuccess(dispatch)
   const error = handleError(dispatch)
 
   useEffect(() => {
-    dispatch({
-      type: 'STARTED',
-      loadingText:
-        weatherLoadingOptions[
-          getRandomNumFromRange(0, weatherLoadingOptions.length)
-        ],
-    })
+    start()
     fetchCurrentWeather(success, error)
   }, [])
 

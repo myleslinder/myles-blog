@@ -9,6 +9,6 @@ export const getCurrentDateString = () =>
 export const getCurrentTimeString = () =>
   new Date().toLocaleTimeString('en-US', {
     timeZone: 'America/Los_Angeles',
-    hour: '2-digit',
+    hour: 'numeric',
     minute: '2-digit',
   })
