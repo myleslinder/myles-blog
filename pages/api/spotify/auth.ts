@@ -19,10 +19,34 @@ const getCurrentUserProfile = async (
   return meRes.json()
 }
 
+type SpotifyTopTimeRange = 'long_term' | 'medium_term' | 'short-term'
+// TODO: type needed - also see that there's error details available linked https://developer.spotify.com/documentation/web-api/reference/#category-personalization
+const getUserTop = async (
+  accessToken: string,
+  type: 'artists' | 'tracks',
+  timeRange: SpotifyTopTimeRange = 'medium_term',
+  limit: number = 20,
+  offset: number = 0,
+) => {
+  const SPOTIFY_TOP_ENDPOINT = `https://api.spotify.com/v1/me/top/${type}`
+  const url = new URL(SPOTIFY_TOP_ENDPOINT)
+  url.searchParams.append('time_range', timeRange)
+  url.searchParams.append('limit', String(limit))
+  url.searchParams.append('offset', String(offset))
+  let topRes = await fetch(url, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+  return topRes.json()
+}
+
+// const getUserCurrentlyPlaying = (accessToken: string) => {}
 const getUserPlayback = async (
   accessToken: string,
 ): Promise<SpotifyPlayback> => {
   const SPOTIFY_PLAYER_ENDPOINT = 'https://api.spotify.com/v1/me/player'
+  // this endpoint has the same params but a slightly different response wihtout device info
+  const SPOTIFY_CURRENTLY_PLAYING_ENDPOINT =
+    'https://api.spotify.com/v1/me/player/currently-playing'
   const url = new URL(SPOTIFY_PLAYER_ENDPOINT)
   // url.searchParams.append('market', 'from-token')
   url.searchParams.append('additional_types', 'track,episode')
