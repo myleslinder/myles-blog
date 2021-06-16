@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## GPT-3 Chatbot in Hero
 
-## Getting Started
+GPT-3-Me chat bot in hero - has ability for chatter to put in name and make a little avatar thats a color picker and emoji selector (like i built in that movie app)
 
-First, run the development server:
+- will need a UI for the back and forth chat (just steal intercom basically)
+- will need my avatar (just image?)
+- will need the avatar selector and info input modal
+- will need the color picker and emoji selector
+- will need to train the GPT-3
+- will need to connect to and use GPT-3
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+**so this might be impossible because this use case wouldn't be approved with GPT-3 for more than 5 people**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+could instead do something using the word of the day - get word of day from an api feed it to gpt-3 to say something cool with it
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Compare our music tastes?
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## A interactive card in the hero that has some of the things from ideas
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- could there be a way to do listen with using spotify? with the webplayback api?
+-
