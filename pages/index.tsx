@@ -6,38 +6,45 @@ import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils'
 import { PhotoGrid } from '../components/PhotoGrid'
 import Section from '../components/Section'
 import WorkExperience from '../components/WorkExperience'
+import Now from '../components/Now'
 
 const HomeHero = () => {
   return (
-    <div className="flex flex-col py-12">
-      {/* <p className="mb-6 font-mono text-xs">Let's get to know each other</p> */}
-      <h1
-        className="text-4xl sm:text-5xl font-bold my-6"
-        style={{ lineHeight: '3.5rem' }}
-      >
-        <span
-          role="img"
-          aria-label="Waving hand emoji"
-          className="text-4xl sm:text-5xl block mb-4"
+    <div className="flex justify-between items-center gap-x-16">
+      <div className="flex flex-col py-12">
+        {/* <p className="mb-6 font-mono text-xs">Let's get to know each other</p> */}
+        <h1
+          className="text-4xl sm:text-5xl font-bold my-6"
+          style={{ lineHeight: '3.5rem' }}
         >
-          👋
-        </span>
-        <span className="bg-blue-100 p-2">Hey, I'm Myles</span>
-        <span className="block pt-4 text-3xl sm:text-4xl text-gray-500">
-          I like to solve problems with technology.
-        </span>
-      </h1>
-      <p className="sm:text-md font-medium mb-12 leading-relaxed">
-        I have the most fun when working cross-functionally across product,
-        design, and development. I'm especially interested in human behavior,
-        why do we do the things we do. I love learning new things and helping
-        others learn.
-      </p>
-      {/* <div>
+          <span
+            role="img"
+            aria-label="Waving hand emoji"
+            className="text-4xl sm:text-5xl block mb-4"
+          >
+            👋
+          </span>
+          <span className="bg-blue-100 p-2">Hey, I'm Myles</span>
+          <span className="block pt-4 text-3xl sm:text-4xl text-gray-500">
+            I like to solve problems with technology.
+          </span>
+        </h1>
+        <p className="sm:text-md font-medium mb-12 leading-relaxed">
+          I have the most fun when working cross-functionally across product,
+          design, and development. I'm especially interested in human behavior,
+          why do we do the things we do. I love learning new things and helping
+          others learn.
+        </p>
+
+        {/* <div>
         <button className="text-lg px-6 border-blue-600 rounded-lg border py-2 text-blue-600 flex justify-center items-center gap-x-3">
           Get In Touch
         </button>
       </div> */}
+      </div>
+      <div className="flex-grow relative top-6 mr-4">
+        <Now />
+      </div>
     </div>
   )
 }

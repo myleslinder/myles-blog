@@ -9,7 +9,7 @@ const handleRefreshAuth = async (refreshToken: string) => {
 
   paramsUrl.searchParams.append('refresh_token', refreshToken)
   let credentials = `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-  //const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
+  // const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
   let Authorization = `Basic ${btoa(credentials)}`
   let res = await fetch(paramsUrl.toString(), {
     method: 'POST',

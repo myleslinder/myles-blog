@@ -19,3 +19,9 @@ could instead do something using the word of the day - get word of day from an a
 
 - could there be a way to do listen with using spotify? with the webplayback api?
 -
+
+## Spotify now playing & listen with me
+
+- need to get my currently playing coming in server side (need to lock in my token for refreshing)
+
+- could do like my current situation and show time, weather, music?
