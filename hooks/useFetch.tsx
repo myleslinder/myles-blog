@@ -78,37 +78,48 @@ export default function useFetch<ExtendedState, R>(
   return [state as FetchState<ExtendedState, R>, buildCellComponent, refresh]
 }
 
-export function buildCellComponent<T, R>(state: FetchState<T, R>) {
-  return ({
+export function buildCellComponent<T, R>(
+  state: FetchState<T, R>,
+  refresh: () => void,
+) {
+  const cellComponentBuilder: CellComponentBuilder<T, R> = ({
     Failure,
     Loading,
     Success,
-  }: {
-    Failure: CellStatusComponentBuilder<T, R>
-    Loading: CellStatusComponentBuilder<T, R>
-    Success: CellStatusComponentBuilder<T, R>
-  }): ReactElement => {
+  }) => {
     if (state.status === 'IDLE') {
       return null
     }
     if (state.status === 'PENDING') {
-      return Loading(state)
+      return Loading(state, refresh)
     }
     if (state.status === 'RESOLVED') {
-      return Success(state)
+      return Success(state, refresh)
     } else if (state.status === 'REJECTED') {
       console.error(state.error)
-      return Failure(state)
+      return Failure(state, refresh)
     }
   }
+  return cellComponentBuilder
 }
 
 /**
  * MARK - Type Declarations
  */
 
+export type CellComponentBuilder<T, R> = ({
+  Failure,
+  Loading,
+  Success,
+}: {
+  Failure: CellStatusComponentBuilder<T, R>
+  Loading: CellStatusComponentBuilder<T, R>
+  Success: CellStatusComponentBuilder<T, R>
+}) => ReactElement
+
 type CellStatusComponentBuilder<T, R> = (
   state: FetchState<T, R>,
+  refresh: () => void,
 ) => ReactElement
 
 type FetchReducerAction<T> = {

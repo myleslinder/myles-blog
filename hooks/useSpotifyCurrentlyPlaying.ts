@@ -1,4 +1,4 @@
-import useFetch from './useFetch'
+import useFetch, { CellComponentBuilder } from './useFetch'
 
 const fetchSpotifyCurrentlyPlaying =
   async (): Promise<SpotifyApi.CurrentlyPlayingObject> => {
@@ -6,10 +6,13 @@ const fetchSpotifyCurrentlyPlaying =
     return await res.json()
   }
 
-export default function useSpotifyCurrentlyPlaying() {
+export default function useSpotifyCurrentlyPlaying(): CellComponentBuilder<
+  any,
+  SpotifyApi.CurrentlyPlayingObject
+> {
   const [fetchState, buildCellComponent, refresh] = useFetch(
     fetchSpotifyCurrentlyPlaying,
   )
 
-  return [buildCellComponent(fetchState), refresh]
+  return buildCellComponent(fetchState, refresh)
 }
