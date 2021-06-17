@@ -1,4 +1,6 @@
-import useCurrentWeather from '../hooks/useCurrentWeather'
+import useCurrentWeather, {
+  ResolvedCurrentWeatherResponse,
+} from '../hooks/useCurrentWeather'
 
 export default function CurrentWeather() {
   const CurrentWeatherCell = useCurrentWeather()
@@ -7,7 +9,11 @@ export default function CurrentWeather() {
   const Loading = ({ extended: { loadingText } }) => (
     <p className="h-8 flex justify-center items-center">{loadingText}</p>
   )
-  const Success = ({ response: weather }) => {
+  const Success = ({
+    response: weather,
+  }: {
+    response: ResolvedCurrentWeatherResponse
+  }) => {
     return (
       <div className="flex justify-center items-center">
         <p>{weather.formattedDescription}</p>

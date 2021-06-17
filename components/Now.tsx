@@ -1,23 +1,43 @@
-import { useEffect } from 'react'
 import { ReplyIcon, ChevronDoubleRightIcon } from '@heroicons/react/outline'
 
 import getRandomNumFromRange from '../utils/getRandomNumFromRange'
-import useUnsplashPhotos from '../hooks/useUnsplashPhotos'
+import useUnsplashPhotos, {
+  UnsplashPhotSearchResponse,
+} from '../hooks/useUnsplashPhotos'
 import CurrentWeather from './CurrentWeather'
 import ImageWithBlurHash from './ImageWithBlurHash'
 import { getCurrentDateString, getCurrentTimeString } from '../utils/datetime'
 import SpotifyNowPlaying from './SpotifyNowPlaying'
 
+// need to give blurhash a fallback in case the image doesn't load
+// need to have the loading and failure states set up for this subcmp
+// also the empty situation for the image searech
+// how to add cancelling to the useFetch - will need to setup abort controller
 export default function Now() {
   const date = getCurrentDateString()
   const time = getCurrentTimeString()
 
-  const unsplashPhotos = useUnsplashPhotos('Vancouver')
-  const randomPhotoIndex = getRandomNumFromRange(0, unsplashPhotos.length)
-
-  useEffect(() => {
-    console.log(unsplashPhotos)
-  }, [unsplashPhotos])
+  const UnsplashPhotosCell = useUnsplashPhotos('Vancouver')
+  const Loading = () => <p>loading</p>
+  const Failure = () => <p>fuck</p>
+  const Success = ({
+    response: { results },
+  }: {
+    response: UnsplashPhotSearchResponse
+  }) => {
+    const randomPhotoIndex = getRandomNumFromRange(0, results.length)
+    return (
+      <div
+        className="absolute top-0 left-0 bottom-0 right-0 w-full h-full rounded-lg"
+        style={{ zIndex: -1 }}
+      >
+        <ImageWithBlurHash
+          hash={results[randomPhotoIndex].blur_hash}
+          url={results[randomPhotoIndex].urls.full}
+        />
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -29,17 +49,11 @@ export default function Now() {
           //   background: `url("${imgUrl}") 100% / cover`,
         }}
       >
-        {unsplashPhotos.length ? (
-          <div
-            className="absolute top-0 left-0 bottom-0 right-0 w-full h-full rounded-lg"
-            style={{ zIndex: -1 }}
-          >
-            <ImageWithBlurHash
-              hash={unsplashPhotos[randomPhotoIndex].blur_hash}
-              url={unsplashPhotos[randomPhotoIndex].urls.full}
-            />
-          </div>
-        ) : null}
+        <UnsplashPhotosCell
+          Loading={Loading}
+          Failure={Failure}
+          Success={Success}
+        />
         <div className="text-xs font-medium flex justify-between items-center bg-black rounded-t-lg px-6 py-1 backdrop-filter backdrop-blur-lg bg-opacity-40 text-white">
           <CurrentWeather />
           <p>

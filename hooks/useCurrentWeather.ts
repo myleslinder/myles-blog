@@ -12,17 +12,17 @@ const formatDescription = (desc: string) =>
 
 const formatTemp = (temp: number) => `${Math.round(temp)}℃`
 
-const fetchCurrentWeather = async () => {
+const fetchCurrentWeather = async (): Promise<OpenWeatherCurrentResponse> => {
   let res = await fetch('/api/weather/current')
   return await res.json()
 }
 
 const postfetch = (
-  state: FetchState<
-    { loadingText: string },
-    OpenWeatherCurrentResponse & CustomWeatherAttributes
-  >,
-) => {
+  state: FetchState<{ loadingText: string }, OpenWeatherCurrentResponse>,
+): FetchState<
+  { loadingText: string },
+  OpenWeatherCurrentResponse & CustomWeatherAttributes
+> => {
   if (state.status === 'RESOLVED') {
     const formattedDescription = formatDescription(
       state.response.weather[0].description,
@@ -39,7 +39,15 @@ const postfetch = (
       },
     }
   } else {
-    return state
+    return {
+      ...state,
+      response: {
+        ...state.response,
+        formattedDescription: '',
+        formattedTemp: '',
+        iconUrl: '',
+      },
+    }
   }
 }
 
@@ -54,17 +62,20 @@ const loadingText =
   ]
 
 export default function useCurrentWeather() {
-  const [state, buildFetchComponent] = useFetch(fetchCurrentWeather, () => ({
+  const [state, buildCellComponent] = useFetch(fetchCurrentWeather, () => ({
     loadingText,
   }))
 
   let newState = postfetch(state)
-  return buildFetchComponent(newState.status, newState)
+  return buildCellComponent(newState)
 }
 
 /**
  * MARK - Type definitions
  */
+
+export type ResolvedCurrentWeatherResponse = OpenWeatherCurrentResponse &
+  CustomWeatherAttributes
 
 type CustomWeatherAttributes = {
   formattedDescription: string

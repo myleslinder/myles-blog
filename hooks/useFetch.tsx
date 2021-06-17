@@ -34,11 +34,11 @@ function fetchReducer<T>(
   }
 }
 
-type Fetcher = () => Promise<any>
-export default function useFetch<ExtendedState>(
-  fetcher: Fetcher,
-  extendedState: () => ExtendedState,
-): [FetchState<ExtendedState, any>, typeof buildFetchComponent] {
+type Fetcher<T> = () => Promise<T>
+export default function useFetch<ExtendedState, R>(
+  fetcher: Fetcher<R>,
+  extendedState?: () => ExtendedState,
+): [FetchState<ExtendedState, R>, typeof buildCellComponent] {
   const [state, dispatch] = useReducer(fetchReducer, {
     extended: null,
     status: 'IDLE',
@@ -49,7 +49,7 @@ export default function useFetch<ExtendedState>(
   const start = () => {
     dispatch({
       type: 'STARTED',
-      extended: extendedState(),
+      extended: extendedState !== undefined ? extendedState() : null,
       response: null,
       error: null,
     })
@@ -72,31 +72,28 @@ export default function useFetch<ExtendedState>(
     fetcher().then(success, error)
   }, [])
 
-  return [state as FetchState<ExtendedState, any>, buildFetchComponent]
+  return [state as FetchState<ExtendedState, R>, buildCellComponent]
 }
 
-export function buildFetchComponent<T, R>(
-  status: PromiseStatus,
-  state: FetchState<T, R>,
-) {
+export function buildCellComponent<T, R>(state: FetchState<T, R>) {
   return ({
     Failure,
     Loading,
     Success,
   }: {
-    Failure: CellBuilder<T, R>
-    Loading: CellBuilder<T, R>
-    Success: CellBuilder<T, R>
+    Failure: CellStatusComponentBuilder<T, R>
+    Loading: CellStatusComponentBuilder<T, R>
+    Success: CellStatusComponentBuilder<T, R>
   }): ReactElement => {
-    if (status === 'IDLE') {
+    if (state.status === 'IDLE') {
       return null
     }
-    if (status === 'PENDING') {
+    if (state.status === 'PENDING') {
       return Loading(state)
     }
-    if (status === 'RESOLVED') {
+    if (state.status === 'RESOLVED') {
       return Success(state)
-    } else if (status === 'REJECTED') {
+    } else if (state.status === 'REJECTED') {
       console.error(state.error)
       return Failure(state)
     }
@@ -107,7 +104,9 @@ export function buildFetchComponent<T, R>(
  * MARK - Type Declarations
  */
 
-type CellBuilder<T, R> = (state: FetchState<T, R>) => ReactElement
+type CellStatusComponentBuilder<T, R> = (
+  state: FetchState<T, R>,
+) => ReactElement
 
 type FetchReducerAction<T> = {
   extended?: T
