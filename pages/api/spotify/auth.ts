@@ -40,21 +40,6 @@ const getUserTop = async (
 }
 
 // const getUserCurrentlyPlaying = (accessToken: string) => {}
-const getUserPlayback = async (
-  accessToken: string,
-): Promise<SpotifyPlayback> => {
-  const SPOTIFY_PLAYER_ENDPOINT = 'https://api.spotify.com/v1/me/player'
-  // this endpoint has the same params but a slightly different response wihtout device info
-  const SPOTIFY_CURRENTLY_PLAYING_ENDPOINT =
-    'https://api.spotify.com/v1/me/player/currently-playing'
-  const url = new URL(SPOTIFY_PLAYER_ENDPOINT)
-  // url.searchParams.append('market', 'from-token')
-  url.searchParams.append('additional_types', 'track,episode')
-  let playerRes = await fetch(url, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
-  return playerRes.json()
-}
 
 const handleInitialAuthorization = async (
   res: NextApiResponse,
@@ -77,11 +62,9 @@ const handleInitialAuthorization = async (
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   })
-  let { access_token } = await authRes.json()
-  //let spotifyUser = await getCurrentUserProfile(access_token)
-  const r = await getUserPlayback(access_token)
+  let json = await authRes.json()
 
-  console.log(`r ${JSON.stringify(r, null, 2)}`)
+  console.log(`json ${JSON.stringify(json, null, 2)}`)
   res.redirect(301, `/`)
 }
 
@@ -124,36 +107,4 @@ type SpotifyImageObject = {
   height: number
   url: string
   width: number
-}
-
-type SpotifyPlayback = {
-  timestamp: number
-  device: {
-    id: string
-    is_active: boolean
-    is_restricted: boolean
-    name: string
-    type: string
-    volume_percent: number
-  }
-  progress_ms: number
-  is_playing: boolean
-  currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown'
-  item: SpotifyTrackObject | SpotifyEpisodeObject | null
-  shuffle_state: boolean
-  repeat_state: 'off' | 'track' | 'context'
-  context: SpotifyContextObject | null
-}
-
-type SpotifyTrackObject = {}
-
-type SpotifyEpisodeObject = {}
-
-type SpotifyContextObject = {
-  external_urls: {
-    spotify: string
-  }
-  href: string
-  type: string
-  uri: string
 }

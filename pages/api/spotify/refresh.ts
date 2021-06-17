@@ -3,14 +3,32 @@ import fetch from 'node-fetch'
 
 const SPOTIFY_TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token'
 
+const getUserPlayback = async (
+  accessToken: string,
+): Promise<SpotifyPlayback> => {
+  //const SPOTIFY_PLAYER_ENDPOINT = 'https://api.spotify.com/v1/me/player'
+  // this endpoint has the same params but a slightly different response wihtout device info
+  const SPOTIFY_CURRENTLY_PLAYING_ENDPOINT =
+    'https://api.spotify.com/v1/me/player/currently-playing'
+  const url = new URL(SPOTIFY_CURRENTLY_PLAYING_ENDPOINT)
+  // url.searchParams.append('market', 'from-token')
+  url.searchParams.append('additional_types', 'track,episode')
+  let playerRes = await fetch(url, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+  return playerRes.json()
+}
+
 const handleRefreshAuth = async (refreshToken: string) => {
+  const clientId = process.env.SPOTIFY_CLIENT_ID
+  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
   const paramsUrl = new URL(SPOTIFY_TOKEN_ENDPOINT)
   paramsUrl.searchParams.append('grant_type', 'refresh_token')
 
   paramsUrl.searchParams.append('refresh_token', refreshToken)
-  let credentials = `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-  // const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
-  let Authorization = `Basic ${btoa(credentials)}`
+  let credentials = `${clientId}:${clientSecret}`
+  const basic = Buffer.from(credentials).toString('base64')
+  let Authorization = `Basic ${basic}`
   let res = await fetch(paramsUrl.toString(), {
     method: 'POST',
     headers: {
@@ -21,4 +39,47 @@ const handleRefreshAuth = async (refreshToken: string) => {
   return await res.json()
 }
 
-export default (req: NextApiRequest, res: NextApiResponse) => {}
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  let { access_token: accessToken } = await handleRefreshAuth(
+    process.env.SPOTIFY_REFRESH_TOKEN,
+  )
+  let json = await getUserPlayback(accessToken)
+
+  res.json(json)
+}
+
+/**
+ * MARK - Type Declarations
+ */
+
+export type SpotifyPlayback = {
+  timestamp: number
+  device: {
+    id: string
+    is_active: boolean
+    is_restricted: boolean
+    name: string
+    type: string
+    volume_percent: number
+  }
+  progress_ms: number
+  is_playing: boolean
+  currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown'
+  item: SpotifyTrackObject | SpotifyEpisodeObject | null
+  shuffle_state: boolean
+  repeat_state: 'off' | 'track' | 'context'
+  context: SpotifyContextObject | null
+}
+
+type SpotifyTrackObject = {}
+
+type SpotifyEpisodeObject = {}
+
+type SpotifyContextObject = {
+  external_urls: {
+    spotify: string
+  }
+  href: string
+  type: string
+  uri: string
+}

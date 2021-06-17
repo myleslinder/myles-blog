@@ -1,4 +1,3 @@
-import { ReactPropTypes } from 'react'
 import { ReactElement } from 'react'
 import { useEffect, useReducer } from 'react'
 
