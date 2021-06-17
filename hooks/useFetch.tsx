@@ -37,13 +37,18 @@ type Fetcher<T> = () => Promise<T>
 export default function useFetch<ExtendedState, R>(
   fetcher: Fetcher<R>,
   extendedState?: () => ExtendedState,
-): [FetchState<ExtendedState, R>, typeof buildCellComponent] {
+): [FetchState<ExtendedState, R>, typeof buildCellComponent, () => void] {
   const [state, dispatch] = useReducer(fetchReducer, {
     extended: null,
     status: 'IDLE',
     response: null,
     error: null,
   })
+
+  const refresh = () => {
+    start()
+    fetcher().then(success, error)
+  }
 
   const start = () => {
     dispatch({
@@ -67,11 +72,10 @@ export default function useFetch<ExtendedState, R>(
   }
 
   useEffect(() => {
-    start()
-    fetcher().then(success, error)
+    refresh()
   }, [])
 
-  return [state as FetchState<ExtendedState, R>, buildCellComponent]
+  return [state as FetchState<ExtendedState, R>, buildCellComponent, refresh]
 }
 
 export function buildCellComponent<T, R>(state: FetchState<T, R>) {

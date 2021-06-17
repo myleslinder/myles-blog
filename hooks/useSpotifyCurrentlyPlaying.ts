@@ -7,9 +7,9 @@ const fetchSpotifyCurrentlyPlaying =
   }
 
 export default function useSpotifyCurrentlyPlaying() {
-  const [fetchState, buildCellComponent] = useFetch(
+  const [fetchState, buildCellComponent, refresh] = useFetch(
     fetchSpotifyCurrentlyPlaying,
   )
 
-  return buildCellComponent(fetchState)
+  return [buildCellComponent(fetchState), refresh]
 }

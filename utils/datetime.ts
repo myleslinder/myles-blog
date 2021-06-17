@@ -2,7 +2,7 @@ export const getCurrentDateString = () =>
   new Date().toLocaleDateString('en-US', {
     timeZone: 'America/New_York',
     weekday: 'short',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   })
 
