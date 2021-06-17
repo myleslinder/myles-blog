@@ -1,5 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import initMiddleware from '../../../lib/init-middleware'
+import Cors from 'cors'
+
+const cors = initMiddleware(
+  Cors({
+    origin: true,
+    methods: ['GET', 'OPTIONS'],
+  }),
+)
+
 const SPOTIFY_AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
 const scopes: SpotifyAuthScope[] = [
   'user-library-read',
@@ -25,8 +35,10 @@ const buildRedirectUrl = () => {
   return url
 }
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-  res.redirect(buildRedirectUrl().toString())
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  await cors(req, res)
+  res.json({})
+  //res.redirect(buildRedirectUrl().toString())
 }
 
 /**

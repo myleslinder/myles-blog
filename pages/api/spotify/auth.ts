@@ -1,6 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch'
 
+import initMiddleware from '../../../lib/init-middleware'
+import Cors from 'cors'
+
+const cors = initMiddleware(
+  Cors({
+    origin: true,
+    methods: ['GET', 'OPTIONS'],
+  }),
+)
+
 const BASE_URL = process.env.BASE_URL
 
 const SPOTIFY_TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token'
@@ -69,11 +79,13 @@ const handleInitialAuthorization = async (
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  return await handleInitialAuthorization(
-    res,
-    req.query.code as string,
-    `${BASE_URL}${REDIRECT_URI}`,
-  )
+  await cors(req, res)
+  res.json({})
+  // return await handleInitialAuthorization(
+  //   res,
+  //   req.query.code as string,
+  //   `${BASE_URL}${REDIRECT_URI}`,
+  // )
 }
 
 /**
