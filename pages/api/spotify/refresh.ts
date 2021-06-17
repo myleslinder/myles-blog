@@ -31,9 +31,10 @@ const getUserPlayback = async (
   let playerRes: Response = await fetch(url, {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
+  console.log(playerRes.headers)
   if (
     playerRes.headers.has('content-type') &&
-    playerRes.headers.get('content-type') === 'application/json'
+    playerRes.headers.get('content-type').includes('application/json')
   ) {
     return playerRes.json()
   }
