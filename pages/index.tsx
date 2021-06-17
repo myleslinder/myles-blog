@@ -140,6 +140,8 @@ export function getServerSideProps(context: NextPageContext) {
       'set-cookie',
       `api=${process.env.INTERNAL_API_SECRET}; HttpOnly;Secure;SameSite=Strict`,
     )
+  } else {
+    console.warn('Res already sent')
   }
   return {
     props: {},
