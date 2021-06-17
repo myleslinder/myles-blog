@@ -5,9 +5,13 @@ import Cors from 'cors'
 
 const SPOTIFY_TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token'
 
+const origin = `${process.env.VERCEL_URL ? 'https://' : 'http://'}${
+  process.env.VERCEL_URL || process.env.BASE_URL
+}`
+
 const cors = initMiddleware(
   Cors({
-    origin: true,
+    origin,
     // Only allow requests with GET and OPTIONS
     methods: ['GET', 'OPTIONS'],
   }),

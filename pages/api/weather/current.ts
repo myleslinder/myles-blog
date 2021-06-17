@@ -1,12 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch'
-
 import initMiddleware from '../../../lib/init-middleware'
 import Cors from 'cors'
 
+const origin = `${process.env.VERCEL_URL ? 'https://' : 'http://'}${
+  process.env.VERCEL_URL || process.env.BASE_URL
+}`
+
 const cors = initMiddleware(
   Cors({
-    origin: true,
+    origin,
     methods: ['GET', 'OPTIONS'],
   }),
 )
