@@ -2,7 +2,7 @@ import getRandomNumFromRange from '../utils/getRandomNumFromRange'
 import useFetch, { FetchState } from './useFetch'
 
 const buildIconUrl = (iconCode: string) =>
-  `http://openweathermap.org/img/wn/${iconCode}@2x.png`
+  `https://openweathermap.org/img/wn/${iconCode}@2x.png`
 
 const formatDescription = (desc: string) =>
   desc
