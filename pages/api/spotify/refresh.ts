@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch'
 import initMiddleware from '../../../lib/init-middleware'
 import Cors from 'cors'
+import simpleProtect from '../../../lib/simple-protect'
 
 const SPOTIFY_TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token'
 
@@ -55,12 +56,15 @@ const handleRefreshAuth = async (refreshToken: string) => {
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   await cors(req, res)
+  if (simpleProtect(req.cookies)) {
+    let { access_token: accessToken } = await handleRefreshAuth(
+      process.env.SPOTIFY_REFRESH_TOKEN,
+    )
 
-  let { access_token: accessToken } = await handleRefreshAuth(
-    process.env.SPOTIFY_REFRESH_TOKEN,
-  )
-
-  res.json(await getUserPlayback(accessToken))
+    res.json(await getUserPlayback(accessToken))
+    return
+  }
+  res.json({})
 }
 
 /**

@@ -13,7 +13,7 @@ const formatDescription = (desc: string) =>
 const formatTemp = (temp: number) => `${Math.round(temp)}℃`
 
 const fetchCurrentWeather = async (): Promise<OpenWeatherCurrentResponse> => {
-  let res = await fetch('/api/weather/current')
+  let res = await fetch('/api/weather/current', { credentials: 'same-origin' })
   return await res.json()
 }
 

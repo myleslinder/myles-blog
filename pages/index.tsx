@@ -7,6 +7,7 @@ import { PhotoGrid } from '../components/PhotoGrid'
 import Section from '../components/Section'
 import WorkExperience from '../components/WorkExperience'
 import Now from '../components/Now'
+import { NextPageContext } from 'next'
 
 const HomeHero = () => {
   return (
@@ -48,7 +49,7 @@ const HomeHero = () => {
   )
 }
 
-export default function Home({ posts }) {
+export default function Home({}) {
   return (
     <div>
       <HomeHero />
@@ -133,17 +134,29 @@ const Project = () => {
   )
 }
 
-export function getStaticProps() {
-  const posts = postFilePaths.map(filePath => {
-    const source = fs.readFileSync(path.join(POSTS_PATH, filePath))
-    const { content, data } = matter(source)
-
-    return {
-      content,
-      data,
-      filePath,
-    }
-  })
-
-  return { props: { posts } }
+export function getServerSideProps(context: NextPageContext) {
+  if (!context.res.writableEnded) {
+    context.res.setHeader(
+      'set-cookie',
+      `api=${process.env.INTERNAL_API_SECRET}; HttpOnly;Secure;SameSite=Strict`,
+    )
+  }
+  return {
+    props: {},
+  }
 }
+
+// export function getStaticProps() {
+//   const posts = postFilePaths.map(filePath => {
+//     const source = fs.readFileSync(path.join(POSTS_PATH, filePath))
+//     const { content, data } = matter(source)
+
+//     return {
+//       content,
+//       data,
+//       filePath,
+//     }
+//   })
+
+//   return { props: { posts } }
+// }
