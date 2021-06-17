@@ -10,9 +10,8 @@ import Now from '../components/Now'
 
 const HomeHero = () => {
   return (
-    <div className="flex justify-between items-center gap-x-16">
-      <div className="flex flex-col py-12">
-        {/* <p className="mb-6 font-mono text-xs">Let's get to know each other</p> */}
+    <div className="flex justify-between items-center gap-x-16 flex-col lg:flex-row">
+      <div className="flex flex-col py-12 lg:max-w-lg max-w-full">
         <h1
           className="text-4xl sm:text-5xl font-bold my-6"
           style={{ lineHeight: '3.5rem' }}
@@ -42,7 +41,7 @@ const HomeHero = () => {
         </button>
       </div> */}
       </div>
-      <div className="flex-grow relative top-6 mr-4">
+      <div className="flex-grow w-full">
         <Now />
       </div>
     </div>

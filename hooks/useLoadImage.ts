@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 // should accept a fallback url for if there's an error
-
+// this needs to be cancelled or something
 const loadImage = (url: string) => {
   return new Promise((res, rej) => {
     const img = new Image()

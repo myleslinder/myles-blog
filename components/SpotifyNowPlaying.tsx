@@ -2,8 +2,24 @@ import { PauseIcon, PlayIcon } from '@heroicons/react/solid'
 import useSpotifyCurrentlyPlaying from '../hooks/useSpotifyCurrentlyPlaying'
 import ProgressBar from './ProgressBar'
 
-const Failure = () => <p>fuck</p>
-const Loading = () => <p>loading...</p>
+const Loading = () => {
+  return (
+    <div>
+      <div className="flex gap-x-4 pt-4">
+        <div className="h-16 w-16 bg-gray-800 animate-pulse"></div>
+        <div className="flex flex-col justify-around">
+          <p className="w-24 bg-gray-800 h-4 animate-pulse"></p>
+          <p className="w-16 bg-gray-800 h-2 animate-pulse"></p>
+        </div>
+      </div>
+      <div className="flex justify-center items-center pt-2 gap-x-2">
+        <div className="pl-0.5 h-4 w-4 bg-gray-800 rounded-full animate-pulse"></div>
+        <ProgressBar progressMs={0} durationMs={1000} />
+      </div>
+    </div>
+  )
+}
+
 const Success = (
   {
     response: playback,
@@ -14,6 +30,7 @@ const Success = (
 ) => {
   let imgUrl: string | undefined
   let artist: string | undefined
+
   if (playback.currently_playing_type === 'track' && 'album' in playback.item) {
     imgUrl = playback.item.album.images[1].url
     artist = playback.item.artists[0].name
@@ -36,9 +53,9 @@ const Success = (
       </div>
       <div className="flex justify-center items-center pt-2 gap-x-2">
         {playback.is_playing ? (
-          <PauseIcon className="h-5 w-5" />
-        ) : (
           <PlayIcon className="h-5 w-5" />
+        ) : (
+          <PauseIcon className="h-5 w-5" />
         )}
         <ProgressBar
           progressMs={playback.progress_ms}
@@ -65,7 +82,7 @@ export default function SpotifyNowPlaying() {
         <p className="font-bold text-xs">Now Playing</p>
       </div>
       <SpotifyCurrentlyPlayingCell
-        Failure={Failure}
+        Failure={Loading}
         Loading={Loading}
         Success={Success}
       />

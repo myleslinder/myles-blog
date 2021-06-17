@@ -8,6 +8,7 @@ import CurrentWeather from './CurrentWeather'
 import ImageWithBlurHash from './ImageWithBlurHash'
 import { getCurrentDateString, getCurrentTimeString } from '../utils/datetime'
 import SpotifyNowPlaying from './SpotifyNowPlaying'
+import { LocationMarkerIcon } from '@heroicons/react/solid'
 
 // need to give blurhash a fallback in case the image doesn't load
 // need to have the loading and failure states set up for this subcmp
@@ -44,14 +45,17 @@ export default function Now() {
   }
 
   return (
-    <div>
-      <div>I'm currently living in Vancouver, Canada</div>
+    <div className="w-full">
+      <div className="flex pb-2 justify-center items-center text-gray-600">
+        <p className="text-sm">I'm currently living in</p>
+        <p className="flex pl-2 gap-x-2 justify-center items-center text-black">
+          <LocationMarkerIcon className="h-5 w-5 text-blue-500" />
+          <span className="border-b-2 border-blue-500">Vancouver, Canada</span>
+        </p>
+      </div>
       <div
-        className="rounded-lg shadow-2xl relative isolate"
-        style={{
-          width: 440,
-          //   background: `url("${imgUrl}") 100% / cover`,
-        }}
+        className="rounded-lg relative isolate w-full"
+        style={{ zIndex: -20 }}
       >
         <UnsplashPhotosCell
           Loading={Loading}

@@ -62,12 +62,15 @@ const loadingText =
   ]
 
 export default function useCurrentWeather() {
-  const [state, buildCellComponent] = useFetch(fetchCurrentWeather, () => ({
-    loadingText,
-  }))
+  const [state, buildCellComponent, refresh] = useFetch(
+    fetchCurrentWeather,
+    () => ({
+      loadingText,
+    }),
+  )
 
   let newState = postfetch(state)
-  return buildCellComponent(newState)
+  return buildCellComponent(newState, refresh)
 }
 
 /**
