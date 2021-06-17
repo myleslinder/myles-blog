@@ -7,14 +7,14 @@ export default function ProgressBar({
   onComplete = () => {},
 }) {
   const [progress, setProgress] = useState(progressMs)
+
   useEffect(() => {
     let interval = setInterval(() => {
       if (paused) {
-        clearInterval(interval)
-        return
+        return clearInterval(interval)
       }
       if (progress < durationMs) {
-        setProgress(progress + 1000)
+        setProgress(p => p + 1000)
       } else {
         onComplete()
         clearInterval(interval)
@@ -22,7 +22,8 @@ export default function ProgressBar({
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [paused])
+  }, [paused, durationMs])
+
   return (
     <div className="shadow w-full bg-gray-400 rounded-xl">
       <div

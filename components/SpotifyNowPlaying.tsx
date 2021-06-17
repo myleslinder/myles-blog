@@ -14,7 +14,7 @@ const Loading = () => {
       </div>
       <div className="flex justify-center items-center pt-2 gap-x-2">
         <div className="pl-0.5 h-4 w-4 bg-gray-800 rounded-full animate-pulse"></div>
-        <ProgressBar progressMs={0} durationMs={1000} />
+        <ProgressBar progressMs={0} durationMs={1000} paused />
       </div>
     </div>
   )
