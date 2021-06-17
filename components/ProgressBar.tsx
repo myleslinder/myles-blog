@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import useInterval from '../hooks/useInterval'
 
 export default function ProgressBar({
   progressMs,
@@ -6,23 +7,18 @@ export default function ProgressBar({
   paused = false,
   onComplete = () => {},
 }) {
-  const [progress, setProgress] = useState(progressMs)
+  const [progress, setProgress] = useState<number>(progressMs)
 
-  useEffect(() => {
-    let interval = setInterval(() => {
-      if (paused) {
-        return clearInterval(interval)
-      }
+  useInterval(
+    () => {
       if (progress < durationMs) {
         setProgress(p => p + 1000)
       } else {
         onComplete()
-        clearInterval(interval)
       }
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [paused, durationMs])
+    },
+    paused ? null : 1000,
+  )
 
   return (
     <div className="shadow w-full bg-gray-400 rounded-xl">
