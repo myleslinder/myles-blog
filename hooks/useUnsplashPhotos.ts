@@ -20,10 +20,10 @@ export default function useUnsplashPhotos(
   searchTerm = 'Vancouver',
   pageSize = 10,
 ) {
-  const [state, buildCellComponent] = useFetch(
+  const [state, buildCellComponent, refresh] = useFetch(
     fetchUnsplashImage(searchTerm, pageSize),
   )
-  return buildCellComponent(state)
+  return buildCellComponent(state, refresh)
 }
 
 /**
