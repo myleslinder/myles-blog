@@ -1,5 +1,5 @@
-import { useEffect, useReducer } from 'react'
 import getRandomNumFromRange from '../utils/getRandomNumFromRange'
+import useFetch, { FetchState } from './useFetch'
 
 const buildIconUrl = (iconCode: string) =>
   `http://openweathermap.org/img/wn/${iconCode}@2x.png`
@@ -12,125 +12,59 @@ const formatDescription = (desc: string) =>
 
 const formatTemp = (temp: number) => `${Math.round(temp)}℃`
 
-const currentWeatherReducer = (
-  state: CurrentWeather,
-  action: {
-    type: string
-    weather?: (OpenWeatherCurrentResponse & CustomWeatherAttributes) | null
-    loadingText?: string
-    error?: any
-  },
+const fetchCurrentWeather = async () => {
+  let res = await fetch('/api/weather/current')
+  return await res.json()
+}
+
+const postfetch = (
+  state: FetchState<
+    { loadingText: string },
+    OpenWeatherCurrentResponse & CustomWeatherAttributes
+  >,
 ) => {
-  switch (action.type) {
-    case 'ERROR': {
-      return {
-        ...state,
-        status: 'REJECTED' as PromiseStatus,
-        error: action.error,
-      }
+  if (state.status === 'RESOLVED') {
+    const formattedDescription = formatDescription(
+      state.response.weather[0].description,
+    )
+    const formattedTemp = formatTemp(state.response.main.temp)
+    const iconUrl = buildIconUrl(state.response.weather[0].icon)
+    return {
+      ...state,
+      response: {
+        ...state.response,
+        formattedDescription,
+        formattedTemp,
+        iconUrl,
+      },
     }
-    case 'STARTED': {
-      return {
-        ...state,
-        status: 'PENDING' as PromiseStatus,
-        loadingText: action.loadingText,
-      }
-    }
-    case 'SUCCESS': {
-      return {
-        ...state,
-        status: 'RESOLVED' as PromiseStatus,
-        weather: action.weather,
-      }
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`)
-    }
+  } else {
+    return state
   }
 }
 
-// NOTE - these `handleX` functions could instead take two params and bind
-// i'm unsure if there are performance differences between the two approaches
-// the purpose is to be able to have them outside of my hook body for simplicity and readability
-
-const handleStart = dispatch => () => {
-  const weatherLoadingOptions = [
-    'Scanning the skies...',
-    'Calibrating weather balloons...',
-    'Browsing the horizon...',
+const weatherLoadingOptions = [
+  'Scanning the skies...',
+  'Calibrating weather balloons...',
+  'Browsing the horizon...',
+]
+const loadingText =
+  weatherLoadingOptions[
+    getRandomNumFromRange(0, weatherLoadingOptions.length - 1)
   ]
 
-  dispatch({
-    type: 'STARTED',
-    loadingText:
-      weatherLoadingOptions[
-        getRandomNumFromRange(0, weatherLoadingOptions.length)
-      ],
-  })
-}
+export default function useCurrentWeather() {
+  const [state, buildFetchComponent] = useFetch(fetchCurrentWeather, () => ({
+    loadingText,
+  }))
 
-const handleSuccess = dispatch => (json: OpenWeatherCurrentResponse) => {
-  const formattedDescription = formatDescription(json.weather[0].description)
-  const formattedTemp = formatTemp(json.main.temp)
-  const iconUrl = buildIconUrl(json.weather[0].icon)
-  dispatch({
-    type: 'SUCCESS',
-    weather: {
-      ...json,
-      formattedDescription,
-      formattedTemp,
-      iconUrl,
-    },
-  })
-}
-
-const handleError = dispatch => (e: any) => {
-  dispatch({
-    type: 'ERROR',
-    error: e,
-  })
-}
-
-const fetchCurrentWeather = async (onRes, onRej) => {
-  try {
-    let res = await fetch('/api/weather/current')
-    onRes(await res.json())
-  } catch (e) {
-    onRej(e)
-  }
-}
-
-export default function useCurrentWeather(): CurrentWeather {
-  const [state, dispatch] = useReducer(currentWeatherReducer, {
-    status: 'IDLE',
-    loadingText: null,
-    weather: null,
-    error: null,
-  })
-
-  const start = handleStart(dispatch)
-  const success = handleSuccess(dispatch)
-  const error = handleError(dispatch)
-
-  useEffect(() => {
-    start()
-    fetchCurrentWeather(success, error)
-  }, [])
-
-  return state
+  let newState = postfetch(state)
+  return buildFetchComponent(newState.status, newState)
 }
 
 /**
  * MARK - Type definitions
  */
-
-type PromiseStatus = 'IDLE' | 'PENDING' | 'ERROR' | 'RESOLVED'
-type CurrentWeather = {
-  status: PromiseStatus
-  loadingText?: string
-  error: any
-  weather: (OpenWeatherCurrentResponse & CustomWeatherAttributes) | null
-}
 
 type CustomWeatherAttributes = {
   formattedDescription: string

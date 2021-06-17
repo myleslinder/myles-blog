@@ -21,7 +21,7 @@ export default function Now() {
 
   return (
     <div>
-      <div>My current situation in Vancouver, Canada</div>
+      <div>I'm currently living in Vancouver, Canada</div>
       <div
         className="rounded-lg shadow-2xl relative isolate"
         style={{

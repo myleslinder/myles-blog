@@ -1,15 +1,13 @@
 import useCurrentWeather from '../hooks/useCurrentWeather'
 
 export default function CurrentWeather() {
-  const { weather, status, loadingText, error } = useCurrentWeather()
+  const CurrentWeatherCell = useCurrentWeather()
 
-  if (status === 'IDLE') {
-    return null
-  }
-  if (status === 'PENDING') {
-    return <p className="h-8 flex justify-center items-center">{loadingText}</p>
-  }
-  if (status === 'RESOLVED') {
+  const Failure = () => <p>Weather unavailable.</p>
+  const Loading = ({ extended: { loadingText } }) => (
+    <p className="h-8 flex justify-center items-center">{loadingText}</p>
+  )
+  const Success = ({ response: weather }) => {
     return (
       <div className="flex justify-center items-center">
         <p>{weather.formattedDescription}</p>
@@ -21,8 +19,9 @@ export default function CurrentWeather() {
         <p>{weather.formattedTemp}</p>
       </div>
     )
-  } else if (status === 'ERROR') {
-    console.error(error)
-    return <p>Weather unavailable.</p>
   }
+
+  return (
+    <CurrentWeatherCell Loading={Loading} Failure={Failure} Success={Success} />
+  )
 }

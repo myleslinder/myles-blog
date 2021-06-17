@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 
+// should accept a fallback url for if there's an error
+
 const loadImage = (url: string) => {
   return new Promise((res, rej) => {
     const img = new Image()
     img.onload = () => res(img)
     img.onerror = (...args) => rej(args)
     img.src = url
-    console.log('loading image')
   })
 }
 
