@@ -1,6 +1,6 @@
 export default function SpotifyNowPlaying() {
   return (
-    <div className=" bg-black text-white rounded-lg relative bottom-4 p-6 mx-2 backdrop-filter backdrop-blur-lg bg-opacity-40">
+    <div className=" bg-black text-white rounded-lg relative bottom-8 p-6 mx-2 backdrop-filter backdrop-blur-lg bg-opacity-40">
       <div className="flex gap-x-4 justify-start items-center">
         <div>
           <img

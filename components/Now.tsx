@@ -34,6 +34,10 @@ export default function Now() {
         <ImageWithBlurHash
           hash={results[randomPhotoIndex].blur_hash}
           url={results[randomPhotoIndex].urls.full}
+          attribution={{
+            url: results[randomPhotoIndex].user.links.html,
+            name: `${results[randomPhotoIndex].user.first_name} ${results[randomPhotoIndex].user.last_name}`,
+          }}
         />
       </div>
     )

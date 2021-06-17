@@ -1,3 +1,4 @@
+import '../styles/globals.css'
 import '@reach/dialog/styles.css'
 import 'tailwindcss/tailwind.css'
 import { AppProps } from 'next/app'
