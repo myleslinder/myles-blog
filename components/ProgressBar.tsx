@@ -3,11 +3,16 @@ import { useState, useEffect } from 'react'
 export default function ProgressBar({
   progressMs,
   durationMs,
+  paused = false,
   onComplete = () => {},
 }) {
   const [progress, setProgress] = useState(progressMs)
   useEffect(() => {
     let interval = setInterval(() => {
+      if (paused) {
+        clearInterval(interval)
+        return
+      }
       if (progress < durationMs) {
         setProgress(progress + 1000)
       } else {
@@ -17,7 +22,7 @@ export default function ProgressBar({
     }, 1000)
 
     return () => clearInterval(interval)
-  })
+  }, [paused])
   return (
     <div className="shadow w-full bg-gray-400 rounded-xl">
       <div

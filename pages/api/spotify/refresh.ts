@@ -20,7 +20,7 @@ const cors = initMiddleware(
 
 const getUserPlayback = async (
   accessToken: string,
-): Promise<SpotifyPlayback> => {
+): Promise<SpotifyPlayback | {}> => {
   //const SPOTIFY_PLAYER_ENDPOINT = 'https://api.spotify.com/v1/me/player'
   // this endpoint has the same params but a slightly different response wihtout device info
   const SPOTIFY_CURRENTLY_PLAYING_ENDPOINT =
@@ -31,7 +31,10 @@ const getUserPlayback = async (
   let playerRes = await fetch(url, {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-  return playerRes.json()
+  if (playerRes.size > 0) {
+    return playerRes.json()
+  }
+  return {}
 }
 
 const handleRefreshAuth = async (refreshToken: string) => {
@@ -51,6 +54,7 @@ const handleRefreshAuth = async (refreshToken: string) => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   })
+
   return await res.json()
 }
 

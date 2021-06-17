@@ -28,26 +28,35 @@ const Success = (
   },
   refresh: () => void,
 ) => {
-  let imgUrl: string | undefined
-  let artist: string | undefined
-
+  let imgUrl: string
+  let artist: string
+  let itemName: string
   if (playback.currently_playing_type === 'track' && 'album' in playback.item) {
     imgUrl = playback.item.album.images[1].url
     artist = playback.item.artists[0].name
+    itemName = playback.item.name
   } else if (
     playback.currently_playing_type === 'episode' &&
     'images' in playback.item
   ) {
     imgUrl = playback.item.images[1].url
     artist = playback.item.show.name
+    itemName = playback.item.name
+  } else {
+    artist = 'Nothing playing'
+    itemName = 'No Artist'
   }
 
   return (
     <div>
       <div className="flex gap-x-4 pt-4">
-        <img src={imgUrl} className="h-16 w-16" />
+        {imgUrl ? (
+          <img src={imgUrl} className="h-16 w-16" />
+        ) : (
+          <div className="h-16 w-16 bg-gray-800 "></div>
+        )}
         <div className="flex flex-col justify-around">
-          <p className="text-sm font-bold">{playback.item.name}</p>
+          <p className="text-sm font-bold">{itemName}</p>
           <p className="text-xs text-gray-300">{artist}</p>
         </div>
       </div>
@@ -58,8 +67,9 @@ const Success = (
           <PauseIcon className="h-5 w-5" />
         )}
         <ProgressBar
-          progressMs={playback.progress_ms}
-          durationMs={playback.item.duration_ms}
+          progressMs={playback?.progress_ms || 0}
+          durationMs={playback?.item?.duration_ms || 10}
+          paused={!playback.is_playing}
           onComplete={() => refresh()}
         />
       </div>
