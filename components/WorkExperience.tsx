@@ -5,9 +5,10 @@ const previousJobPositions = [
     company: 'Emergence Labs',
     positions: [
       {
-        title: 'Partner, Technology Operations',
+        title: 'Co-Founder, Development Lead',
         dateLine: 'October 2018 - May 2021',
-        description: '',
+        description:
+          'Emergence Labs operated primarily within the Salesforce ecosystem and as the lead developer I architected and developed a range of solutions for clients using web technologies. Worked closely with our clients to ensure that our solutions were effective at addressing their problems and we could prove a clear ROI.',
       },
     ],
     logoUrl: '/el-logo.png',
@@ -25,12 +26,14 @@ const previousJobPositions = [
       {
         title: 'Senior Manager, Digital Products & Strategy',
         dateLine: 'May 2018 - October 2018',
-        description: '',
+        description:
+          'In 2018 I was primarily focused on an overhaul of the marketing website to go along with a company brand evolution. I continued to manage and improve the LMS as well as build out product management workflows within the organization. My responsibilities also grew to include supporting roles with a number of different departments including marketing and operations.',
       },
       {
         title: 'Manager, Digital Products & Strategy',
         dateLine: 'February 2017 - April 2018',
-        description: '',
+        description:
+          'I joined Brainstation to launch their online sychronous education offering and manage their suite of digital products, which included a number of internal tools. During this time I launched the online courses business line, managed and released a new custom learning platform for students, and improved the internal tools.',
       },
     ],
     dateLine: 'May 2018 - October 2018',
@@ -47,12 +50,14 @@ const previousJobPositions = [
       {
         title: 'Senior Consultant, Strategy & Technology',
         dateLine: 'February 2016 - February 2017',
-        description: '',
+        description:
+          'As a Senior Consultant I worked as an engagement lead on client projects defining requirements, running design thinking workshops, and managing the account. I often also operated as an agile project manager by defining project teams, developing project plans, and managing the ongoing project. I was heavily involved in the design phase of projects and it’s associated components (i.e Information Architecture, User Research, User Testing)',
       },
       {
         title: 'Consultant, Strategy & Technology',
         dateLine: 'February 2015 - February 2016',
-        description: '',
+        description:
+          'I worked on interdisciplinary teams to create usable and desirable products. My role involved uncovering client goals, defining end-user experiences, and documenting technology requirements to ensure client satisfaction and end user acceptance. ',
       },
     ],
     logoUrl: '/konrad-logo.png',
