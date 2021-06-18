@@ -6,43 +6,7 @@ import { useRouter } from 'next/dist/client/router'
 import { useEffect } from 'react'
 import { Dialog } from '@reach/dialog'
 import MLogo from '../icons/MLogo'
-
-import { useTheme } from 'next-themes'
-import { DesktopComputerIcon, MoonIcon, SunIcon } from '@heroicons/react/solid'
-const ThemeChanger = () => {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
-
-  // When mounted on client, now we can show the UI
-  useEffect(() => setMounted(true), [])
-
-  if (!mounted) return null
-  const isLight = theme === 'light'
-  const isDark = theme === 'dark'
-  const Icon = isLight ? SunIcon : isDark ? MoonIcon : DesktopComputerIcon
-  const label = isLight ? 'Light Theme' : isDark ? 'Dark Theme' : 'System Theme'
-  const handleThemeChange = () => {
-    if (isLight) {
-      setTheme('dark')
-    } else if (isDark) {
-      setTheme('system')
-    } else {
-      setTheme('light')
-    }
-  }
-  // need accessibility for the icon
-  return (
-    <div>
-      <button
-        onClick={() => handleThemeChange()}
-        className="p-2 bg-gray-200 rounded-md dark:bg-gray-700"
-      >
-        <Icon className="h-5 w-5" />
-        <span className="hidden">{label}</span>
-      </button>
-    </div>
-  )
-}
+import ThemeListbox from './ThemeListbox'
 
 const Menu = ({ isMobile = false, beforeNavigation = () => {} }) => {
   const router = useRouter()
@@ -63,7 +27,7 @@ const Menu = ({ isMobile = false, beforeNavigation = () => {} }) => {
       : 'flex-row text-sm'
   }`
   const itemClassList = isMobile
-    ? 'py-6 border-gray-300 border-b w-full text-center'
+    ? 'py-6 border-gray-300 border-b w-full text-center flex justify-center items-center'
     : 'px-6'
   return (
     <ul className={classList}>
@@ -96,7 +60,7 @@ const Menu = ({ isMobile = false, beforeNavigation = () => {} }) => {
     </button>
   </li> */}
       <li className={itemClassList} style={{ borderBottom: 'none' }}>
-        <ThemeChanger />
+        <ThemeListbox />
       </li>
     </ul>
   )

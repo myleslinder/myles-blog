@@ -10,6 +10,7 @@
     "np": "tsc ./lib/scaffold-post"
   },
   "dependencies": {
+    "@headlessui/react": "^1.2.0",
     "@heroicons/react": "^1.0.1",
     "@reach/dialog": "^0.15.0",
     "@tailwindcss/typography": "^0.4.0",

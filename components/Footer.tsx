@@ -8,7 +8,6 @@ import SpotifyIcon from '../icons/SpotifyIcon'
 import TwitterIcon from '../icons/TwitterIcon'
 
 function drawerStateReducer(state, action) {
-  console.log(state, action)
   if (action === 'SHOW_SOCIAL' && state === 'CLOSED') {
     return 'SOCIAL'
   }

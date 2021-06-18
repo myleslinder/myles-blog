@@ -9,7 +9,10 @@ import { Footer } from '../components/Footer'
 import { Navigation } from '../components/Navigation'
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <div className="antialiased min-h-screen isolate dark:bg-gray-900 dark:text-white">
+  <div
+    className="antialiased min-h-screen isolate dark:bg-gray-900 dark:text-white"
+    // style={{ transition: 'color 0.2s ease-out, background 0.2s ease-out' }}
+  >
     <Head>
       <link rel="icon" href="/M-logo.svg" />
       <title>Myles Linder</title>
