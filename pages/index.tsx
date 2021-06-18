@@ -31,11 +31,14 @@ const HomeHero = () => {
             I like to solve problems with technology.
           </span>
         </h1>
-        <p className="sm:text-md font-medium mb-12 leading-relaxed">
-          I have the most fun when working cross-functionally across product,
-          design, and development. I'm especially interested in human behavior,
-          why do we do the things we do. I love learning new things and helping
-          others learn.
+        <p className="sm:text-md font-medium mb-6 leading-loose">
+          At work I lead teams to create digital products, services, and
+          strategies. My previous roles have spanned product, development, and
+          design.
+        </p>
+        <p className="sm:text-md font-medium mb-6 leading-loose">
+          Outside of work I'm interested in behaviour, learning, and SOMETHING
+          ELSE.
         </p>
 
         {/* <div>
@@ -66,20 +69,19 @@ export default function Home({}) {
           <div className="lg:max-w-md flex flex-col">
             <p className="py-4">
               I was born and raised in Vancouver, Canada where I grew to love
-              the mountains, especially skiing and hiking. After university I
-              moved to Toronto shifting my attention to different interests -
-              namely eating and drinking.
+              the mountains, especially skiing and hiking. I later moved to
+              Toronto shifting my attention to different interests - namely
+              eating and drinking.
             </p>
             <p className="py-4">
-              I'm currently living in Vancouver, but I'm not sure where I'll be
-              settling in the near future. My educational background is in
-              business, however I've worked as a PM, designer, and developer.
+              I'm currently living in Vancouver, but actively looking for where
+              to call home next. My educational background is in business,
+              however I've worked in many capacities, primarly as a PM or
+              developer.
             </p>
             <p className="py-4">
-              Most recently, I was the co-founder and technology lead of a
-              software consulting business focused on CRM technologies with a
-              few long-time friends. I'm passionate about learning/education,
-              technology, and behaviour (especially behavioural economics).
+              Most recently, I co-founded a software consulting business focused
+              on CRM technologies with a few long-time friends.
             </p>
           </div>
           <div
@@ -91,13 +93,13 @@ export default function Home({}) {
         </Section>
         <Section
           title="Experience"
-          subtitle="A subset of my professional work experience, in reverse chronological order"
+          subtitle="A sample of my professional experience"
         >
           <WorkExperience />
         </Section>
         <Section
           title="Projects"
-          subtitle="Some things I'm working on - just for fun"
+          subtitle="Some just-for-fun things I may or may not be working on"
         >
           <Project />
         </Section>

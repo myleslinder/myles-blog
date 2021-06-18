@@ -84,14 +84,14 @@ export default function SpotifyNowPlaying() {
   return (
     <div className=" dark:bg-black dark:text-white bg-white text-black rounded-lg relative bottom-8 p-6 mx-2 backdrop-filter backdrop-blur-lg bg-opacity-40 dark:bg-opacity-40">
       <div className="flex gap-x-4 justify-start items-center">
-        <div>
+        <div className="p-1 rounded-md bg-black">
           <img
             src="/spotify-icon-logo.svg"
             alt="Spotify Icon Logo"
             className="h-4 w-4"
           />
         </div>
-        <p className="font-bold text-xs">Now Playing</p>
+        <p className="font-bold text-sm">Now Playing</p>
       </div>
       <SpotifyCurrentlyPlayingCell
         Failure={Loading}
