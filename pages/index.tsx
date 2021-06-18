@@ -24,8 +24,10 @@ const HomeHero = () => {
           >
             👋
           </span>
-          <span className="bg-blue-100 p-2">Hey, I'm Myles</span>
-          <span className="block pt-4 text-3xl sm:text-4xl text-gray-500">
+          <span className="bg-blue-100 dark:bg-blue-900 p-2">
+            Hey, I'm Myles
+          </span>
+          <span className="block pt-4 text-3xl sm:text-4xl text-gray-500 dark:text-gray-400">
             I like to solve problems with technology.
           </span>
         </h1>
@@ -82,7 +84,7 @@ export default function Home({}) {
           </div>
           <div
             className="lg:transform lg:-translate-y-20"
-            style={{ zIndex: -1 }}
+            // style={{ zIndex: -1 }}
           >
             <PhotoGrid />
           </div>
@@ -106,7 +108,7 @@ export default function Home({}) {
 
 const Project = () => {
   return (
-    <div className="relative w-full bg-gray-50 h-72 md:p-12 p-8 rounded-lg text-center flex flex-col justify-between">
+    <div className="relative w-full bg-gray-50 h-72 md:p-12 p-8 rounded-lg text-center flex flex-col justify-between text-black">
       <p className="md:text-5xl text-3xl font-bold ">
         Groups for <span className="text-green-600">Spotify</span>
       </p>

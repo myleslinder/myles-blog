@@ -66,7 +66,7 @@ const previousJobPositions = [
 
 const JobPosition = ({ position, dateLine, description }) => {
   return (
-    <div className="bg-white p-6 rounded-lg flex flex-col my-6">
+    <div className="bg-white text-black p-6 rounded-lg flex flex-col my-6">
       <div className="flex justify-between flex-grow py-4 md:items-center md:flex-row flex-col">
         <p className="font-bold text-md md:pb-0 pb-4">{position}</p>
         <p className="font-mono text-blue-700 text-xs ">{dateLine}</p>

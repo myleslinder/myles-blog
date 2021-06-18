@@ -4,7 +4,43 @@ import { useState } from 'react'
 import useMobileResize from '../hooks/useMobileResize'
 import { useRouter } from 'next/dist/client/router'
 import { useEffect } from 'react'
-import { Dialog, DialogContent, DialogOverlay } from '@reach/dialog'
+import { Dialog } from '@reach/dialog'
+import MLogo from '../icons/MLogo'
+
+import { useTheme } from 'next-themes'
+import { DesktopComputerIcon, MoonIcon, SunIcon } from '@heroicons/react/solid'
+const ThemeChanger = () => {
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
+
+  // When mounted on client, now we can show the UI
+  useEffect(() => setMounted(true), [])
+
+  if (!mounted) return null
+  const isLight = theme === 'light'
+  const isDark = theme === 'dark'
+  const Icon = isLight ? SunIcon : isDark ? MoonIcon : DesktopComputerIcon
+
+  const handleThemeChange = () => {
+    if (isLight) {
+      setTheme('dark')
+    } else if (isDark) {
+      setTheme('system')
+    } else {
+      setTheme('light')
+    }
+  }
+  return (
+    <div>
+      <button
+        onClick={() => handleThemeChange()}
+        className="p-2 bg-gray-200 rounded-md dark:bg-gray-700"
+      >
+        <Icon className="h-5 w-5" />
+      </button>
+    </div>
+  )
+}
 
 const Menu = ({ isMobile = false, beforeNavigation = () => {} }) => {
   const router = useRouter()
@@ -20,7 +56,9 @@ const Menu = ({ isMobile = false, beforeNavigation = () => {} }) => {
   }, [])
 
   const classList = `flex justify-around font-mono items-center ${
-    isMobile ? 'flex-col w-full bg-white text-lg' : 'flex-row text-sm'
+    isMobile
+      ? 'flex-col w-full bg-white dark:bg-gray-900 text-lg'
+      : 'flex-row text-sm'
   }`
   const itemClassList = isMobile
     ? 'py-6 border-gray-300 border-b w-full text-center'
@@ -55,6 +93,9 @@ const Menu = ({ isMobile = false, beforeNavigation = () => {} }) => {
       <ExternalLinkIcon className="h-4 w-4 ml-2" />
     </button>
   </li> */}
+      <li>
+        <ThemeChanger />
+      </li>
     </ul>
   )
 }
@@ -78,7 +119,7 @@ const NavigationMenu = () => {
         <Dialog
           isOpen={isOpen}
           onDismiss={close}
-          className="w-full p-6 m-0"
+          className="w-full p-6 m-0 dark:bg-gray-900"
           aria-label="Navigation Menu"
         >
           <div className="w-full flex flex-col items-end">
@@ -100,12 +141,13 @@ const NavigationMenu = () => {
 
 export const Navigation = () => {
   return (
-    <nav className="mx-auto flex justify-between py-5 items-center sticky top-0 bg-white ">
+    <nav className="mx-auto flex justify-between py-5 items-center sticky top-0 bg-white dark:bg-gray-900 z-10">
       <div>
         <Link href="/">
           <a>
             <span className="hidden">Home</span>
-            <img alt="M-Logo" src="/M-logo.svg" width="65" />
+            {/* <img alt="M-Logo" src="/M-logo.svg" width="65" /> */}
+            <MLogo />
           </a>
         </Link>
       </div>

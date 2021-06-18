@@ -2,6 +2,10 @@ import { MailIcon, GlobeAltIcon, XIcon } from '@heroicons/react/outline'
 import { useState } from 'react'
 import { useReducer } from 'react'
 import useMobileResize from '../hooks/useMobileResize'
+import GithubIcon from '../icons/GithubIcon'
+import LinkdedInIcon from '../icons/LinkedInIcon'
+import SpotifyIcon from '../icons/SpotifyIcon'
+import TwitterIcon from '../icons/TwitterIcon'
 
 function drawerStateReducer(state, action) {
   console.log(state, action)
@@ -26,7 +30,7 @@ export const Footer = () => {
 
   return (
     <div
-      className={`bg-white flex justify-between items-center sticky h-20 bottom-0 left-0 ${
+      className={`bg-white dark:bg-gray-900 flex justify-between items-center sticky h-20 bottom-0 left-0 ${
         isSocialOpen ? 'flex-row-reverse' : 'flex-row'
       }`}
     >
@@ -88,7 +92,8 @@ const SocialLinks = ({ isOpen, isVisible, onOpenRequest }) => {
         <div className="px-4">
           <a href="https://twitter.com/myleslinder" target="_blank">
             <span className="hidden">Twitter</span>
-            <img src="/TwitterIcon.svg" width="18" alt="Twitter Logo" />
+            {/* <img src="/TwitterIcon.svg" width="18" alt="Twitter Logo" /> */}
+            <TwitterIcon />
           </a>
         </div>
         <div className="px-4">
@@ -97,19 +102,22 @@ const SocialLinks = ({ isOpen, isVisible, onOpenRequest }) => {
             target="_blank"
           >
             <span className="hidden">LinkedIn</span>
-            <img src="/LinkedInIcon.svg" width="18" alt="LinkedIn Logo" />
+            {/* <img src="/LinkedInIcon.svg" width="18" alt="LinkedIn Logo" /> */}
+            <LinkdedInIcon />
           </a>
         </div>
         <div className="px-4">
           <a href="https://open.spotify.com/user/myleslinder" target="_blank">
             <span className="hidden">Spotify</span>
-            <img src="/SpotifyIcon.svg" width="18" alt="Spotify Logo" />
+            {/* <img src="/SpotifyIcon.svg" width="18" alt="Spotify Logo" /> */}
+            <SpotifyIcon />
           </a>
         </div>
         <div className="px-4">
           <a href="https://github.com/myleslinder" target="_blank">
             <span className="hidden">Github</span>
-            <img src="/GithubIcon.svg" width="18" alt="Github Logo" />
+            {/* <img src="/GithubIcon.svg" width="18" alt="Github Logo" /> */}
+            <GithubIcon />
           </a>
         </div>
         {/* <div className="px-4">

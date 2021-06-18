@@ -57,14 +57,16 @@ const Success = (
         )}
         <div className="flex flex-col justify-around">
           <p className="text-sm font-bold">{itemName}</p>
-          <p className="text-xs text-gray-300">{artist}</p>
+          <p className="text-xs dark:text-gray-300 text-gray-700 font-medium">
+            {artist}
+          </p>
         </div>
       </div>
       <div className="flex justify-center items-center pt-2 gap-x-2">
         {playback.is_playing ? (
-          <PlayIcon className="h-5 w-5" />
+          <PlayIcon className="h-5 w-5 text-white" />
         ) : (
-          <PauseIcon className="h-5 w-5" />
+          <PauseIcon className="h-5 w-5 text-white" />
         )}
         <ProgressBar
           progressMs={playback?.progress_ms || 0}
@@ -80,7 +82,7 @@ export default function SpotifyNowPlaying() {
   const SpotifyCurrentlyPlayingCell = useSpotifyCurrentlyPlaying()
 
   return (
-    <div className=" bg-black text-white rounded-lg relative bottom-8 p-6 mx-2 backdrop-filter backdrop-blur-lg bg-opacity-40">
+    <div className=" dark:bg-black dark:text-white bg-white text-black rounded-lg relative bottom-8 p-6 mx-2 backdrop-filter backdrop-blur-lg bg-opacity-40 dark:bg-opacity-40">
       <div className="flex gap-x-4 justify-start items-center">
         <div>
           <img

@@ -30,7 +30,7 @@ export default function Now() {
     return (
       <div
         className="absolute top-0 left-0 bottom-0 right-0 w-full h-full rounded-lg"
-        style={{ zIndex: -1 }}
+        // style={{ zIndex: -1 }}
       >
         <ImageWithBlurHash
           hash={results[randomPhotoIndex].blur_hash}
@@ -46,23 +46,23 @@ export default function Now() {
 
   return (
     <div className="w-full">
-      <div className="flex pb-2 justify-center items-center text-gray-600">
+      <div className="flex pb-2 justify-center items-center text-gray-600 dark:text-gray-400">
         <p className="text-sm">I'm currently living in</p>
-        <p className="flex pl-2 gap-x-2 justify-center items-center text-black">
+        <p className="flex pl-2 gap-x-2 justify-center items-center text-black dark:text-white">
           <LocationMarkerIcon className="h-5 w-5 text-blue-500" />
           <span className="border-b-2 border-blue-500">Vancouver, Canada</span>
         </p>
       </div>
       <div
         className="rounded-lg relative isolate w-full"
-        style={{ zIndex: -20 }}
+        // style={{ zIndex: -20 }}
       >
         <UnsplashPhotosCell
           Loading={Loading}
           Failure={Failure}
           Success={Success}
         />
-        <div className="text-xs font-medium flex justify-between items-center bg-black rounded-t-lg px-6 py-1 backdrop-filter backdrop-blur-lg bg-opacity-40 text-white">
+        <div className="text-xs font-medium flex justify-between items-center dark:bg-black bg-white rounded-t-lg px-6 py-1 backdrop-filter backdrop-blur-lg bg-opacity-40 dark:bg-opacity-40">
           <CurrentWeather />
           <p>
             {date} {time}
