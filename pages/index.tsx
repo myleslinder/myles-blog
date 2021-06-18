@@ -37,8 +37,8 @@ const HomeHero = () => {
           design.
         </p>
         <p className="sm:text-md font-medium mb-6 leading-loose">
-          Outside of work I'm interested in behaviour, learning, and SOMETHING
-          ELSE.
+          Outside of work I'm interested in learning, behaviour, and the
+          outdoors.
         </p>
 
         {/* <div>

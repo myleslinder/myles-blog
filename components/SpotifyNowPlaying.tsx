@@ -6,14 +6,14 @@ const Loading = () => {
   return (
     <div>
       <div className="flex gap-x-4 pt-4">
-        <div className="h-16 w-16 bg-gray-800 animate-pulse"></div>
+        <div className="h-16 w-16 dark:bg-gray-800 bg-gray-200 animate-pulse"></div>
         <div className="flex flex-col justify-around">
-          <p className="w-24 bg-gray-800 h-4 animate-pulse"></p>
-          <p className="w-16 bg-gray-800 h-2 animate-pulse"></p>
+          <p className="w-24 dark:bg-gray-800 bg-gray-200 h-4 animate-pulse"></p>
+          <p className="w-16 dark:bg-gray-800 bg-gray-200 h-2 animate-pulse"></p>
         </div>
       </div>
       <div className="flex justify-center items-center pt-2 gap-x-2">
-        <div className="pl-0.5 h-4 w-4 bg-gray-800 rounded-full animate-pulse"></div>
+        <div className="pl-0.5 h-4 w-4 dark:bg-gray-800 bg-gray-200 rounded-full animate-pulse"></div>
         <ProgressBar progressMs={0} durationMs={1000} paused />
       </div>
     </div>
