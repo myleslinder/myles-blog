@@ -27,7 +27,7 @@ const previousJobPositions = [
         title: 'Senior Manager, Digital Products & Strategy',
         dateLine: 'May 2018 - October 2018',
         description:
-          'In 2018 I was primarily focused on an overhaul of the marketing website to go along with a company brand evolution. I continued to manage and improve the LMS as well as build out product management workflows within the organization. My responsibilities also grew to include supporting roles with a number of different departments including marketing and operations.',
+          'In 2018 I was primarily focused on an overhaul of the marketing website to go along with a company brand evolution. I releaunched the company blog and continued to manage and improve the LMS as well as build out product management workflows within the organization. My responsibilities also grew to include supporting roles with a number of different departments including marketing and operations.',
       },
       {
         title: 'Manager, Digital Products & Strategy',
@@ -95,6 +95,7 @@ const WorkExperience = () => {
           <div className="pb-12">
             <img src={logoUrl} alt={`${company} logo`} style={{ width: 250 }} />
           </div>
+
           {positions.map(({ title, dateLine, description }) => (
             <JobPosition
               key={title}
