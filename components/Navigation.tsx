@@ -20,7 +20,7 @@ const ThemeChanger = () => {
   const isLight = theme === 'light'
   const isDark = theme === 'dark'
   const Icon = isLight ? SunIcon : isDark ? MoonIcon : DesktopComputerIcon
-
+  const label = isLight ? 'Light Theme' : isDark ? 'Dark Theme' : 'System Theme'
   const handleThemeChange = () => {
     if (isLight) {
       setTheme('dark')
@@ -30,6 +30,7 @@ const ThemeChanger = () => {
       setTheme('light')
     }
   }
+  // need accessibility for the icon
   return (
     <div>
       <button
@@ -37,6 +38,7 @@ const ThemeChanger = () => {
         className="p-2 bg-gray-200 rounded-md dark:bg-gray-700"
       >
         <Icon className="h-5 w-5" />
+        <span className="hidden">{label}</span>
       </button>
     </div>
   )
@@ -93,7 +95,7 @@ const Menu = ({ isMobile = false, beforeNavigation = () => {} }) => {
       <ExternalLinkIcon className="h-4 w-4 ml-2" />
     </button>
   </li> */}
-      <li>
+      <li className={itemClassList} style={{ borderBottom: 'none' }}>
         <ThemeChanger />
       </li>
     </ul>
