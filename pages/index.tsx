@@ -1,13 +1,8 @@
-import fs from 'fs'
-import matter from 'gray-matter'
-import path from 'path'
-import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils'
-
+import { NextPageContext } from 'next'
+import Now from '../components/Now'
 import { PhotoGrid } from '../components/PhotoGrid'
 import Section from '../components/Section'
 import WorkExperience from '../components/WorkExperience'
-import Now from '../components/Now'
-import { NextPageContext } from 'next'
 
 const HomeHero = () => {
   return (
@@ -28,13 +23,14 @@ const HomeHero = () => {
             Hey, I'm Myles
           </span>
           <span className="block pt-4 text-3xl sm:text-4xl text-gray-500 dark:text-gray-400">
-            I like to solve problems with technology.
+            I like to solve problems with technology
           </span>
         </h1>
         <p className="sm:text-md font-medium mb-6 leading-loose">
-          At work I lead teams to create digital products, services, and
-          strategies. My previous roles have spanned product, development, and
-          design.
+          I'm a software developer and former entreprenuer. I've worked in a
+          variety of roles to build production software for nearly a decade, in
+          addition to developement, I've worked as a Product Manager and a
+          technology consultant.
         </p>
         <p className="sm:text-md font-medium mb-6 leading-loose">
           Outside of work I'm interested in learning, behaviour, and the

@@ -91,7 +91,7 @@ export default function SpotifyNowPlaying() {
             className="h-4 w-4"
           />
         </div>
-        <p className="font-bold text-sm">Now Playing</p>
+        <p className="font-bold text-sm">Now Playing on my Spotify</p>
       </div>
       <SpotifyCurrentlyPlayingCell
         Failure={Loading}
