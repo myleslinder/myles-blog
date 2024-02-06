@@ -27,14 +27,14 @@ const HomeHero = () => {
           </span>
         </h1>
         <p className="sm:text-md font-medium mb-6 leading-loose">
-          I'm a software developer and former entreprenuer. I've worked in a
+          I'm a software developer and former entrepreneur. I've worked in a
           variety of roles to build production software for nearly a decade, in
-          addition to developement, I've worked as a Product Manager and a
+          addition to development, I've worked as a Product Manager and a
           technology consultant.
         </p>
         <p className="sm:text-md font-medium mb-6 leading-loose">
-          Outside of work I'm interested in learning, behaviour, and the
-          outdoors.
+          Outside of work, I'm interested in behavioural economics, the
+          psychology of learning, and the outdoors.
         </p>
 
         {/* <div>
@@ -65,19 +65,7 @@ export default function Home({}) {
           <div className="lg:max-w-md flex flex-col">
             <p className="py-4">
               I was born and raised in Vancouver, Canada where I grew to love
-              the mountains, especially skiing and hiking. I later moved to
-              Toronto shifting my attention to different interests - namely
-              eating and drinking.
-            </p>
-            <p className="py-4">
-              I'm currently living in Vancouver, but actively looking for where
-              to call home next. My educational background is in business,
-              however I've worked in many capacities, primarly as a PM or
-              developer.
-            </p>
-            <p className="py-4">
-              Most recently, I co-founded a software consulting business focused
-              on CRM technologies with a few long-time friends.
+              the mountains; especially skiing and hiking.
             </p>
           </div>
           <div
