@@ -1,6 +1,5 @@
-import { MailIcon, GlobeAltIcon, XIcon } from '@heroicons/react/outline'
-import { useState } from 'react'
-import { useReducer } from 'react'
+import { GlobeAltIcon, MailIcon, XIcon } from '@heroicons/react/outline'
+import { useReducer, useState } from 'react'
 import useMobileResize from '../hooks/useMobileResize'
 import GithubIcon from '../icons/GithubIcon'
 import LinkdedInIcon from '../icons/LinkedInIcon'
@@ -89,7 +88,11 @@ const SocialLinks = ({ isOpen, isVisible, onOpenRequest }) => {
     return (
       <div className="flex justify-between max-w-lg items-center">
         <div className="px-4">
-          <a href="https://twitter.com/myleslinder" target="_blank">
+          <a
+            href="https://twitter.com/myleslinder"
+            target="_blank"
+            rel="noreferrer"
+          >
             <span className="hidden">Twitter</span>
             {/* <img src="/TwitterIcon.svg" width="18" alt="Twitter Logo" /> */}
             <TwitterIcon />
@@ -97,8 +100,9 @@ const SocialLinks = ({ isOpen, isVisible, onOpenRequest }) => {
         </div>
         <div className="px-4">
           <a
-            href="https://www.linkedin.com/in/myles-linder-bb234347/"
+            href="https://www.linkedin.com/in/myles-linder/"
             target="_blank"
+            rel="noreferrer"
           >
             <span className="hidden">LinkedIn</span>
             {/* <img src="/LinkedInIcon.svg" width="18" alt="LinkedIn Logo" /> */}
@@ -106,14 +110,22 @@ const SocialLinks = ({ isOpen, isVisible, onOpenRequest }) => {
           </a>
         </div>
         <div className="px-4">
-          <a href="https://open.spotify.com/user/myleslinder" target="_blank">
+          <a
+            href="https://open.spotify.com/user/myleslinder"
+            target="_blank"
+            rel="noreferrer"
+          >
             <span className="hidden">Spotify</span>
             {/* <img src="/SpotifyIcon.svg" width="18" alt="Spotify Logo" /> */}
             <SpotifyIcon />
           </a>
         </div>
         <div className="px-4">
-          <a href="https://github.com/myleslinder" target="_blank">
+          <a
+            href="https://github.com/myleslinder"
+            target="_blank"
+            rel="noreferrer"
+          >
             <span className="hidden">Github</span>
             {/* <img src="/GithubIcon.svg" width="18" alt="Github Logo" /> */}
             <GithubIcon />

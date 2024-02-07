@@ -27,14 +27,24 @@ const HomeHero = () => {
           </span>
         </h1>
         <p className="sm:text-md font-medium mb-6 leading-loose">
-          I'm a software developer and former entrepreneur. I've worked in a
-          variety of roles to build production software for nearly a decade, in
-          addition to development, I've worked as a Product Manager and a
-          technology consultant.
+          I'm a software developer, serial hobbyist, and former founder. Most
+          recently, I was the technical co-founder at{' '}
+          <a
+            href="https://persy.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="border-b-2 border-slate-400"
+          >
+            Persy AI
+          </a>
+          , an app that used professional network data and AI to write
+          contextual content for outbound sales teams.
         </p>
+
         <p className="sm:text-md font-medium mb-6 leading-loose">
-          Outside of work, I'm interested in behavioural economics, the
-          psychology of learning, and the outdoors.
+          Before Persy, I co-founded Emergence Labs, a Salesforce partner
+          focused on custom development projects for mid-sized businesses.
+          Emergence Labs' client base was transitioned to SkyVenn in 2021.
         </p>
 
         {/* <div>
@@ -64,8 +74,15 @@ export default function Home({}) {
         <Section title="About Me" subtitle="Lets get to know each other">
           <div className="lg:max-w-md flex flex-col">
             <p className="py-4">
-              I was born and raised in Vancouver, Canada where I grew to love
-              the mountains; especially skiing and hiking.
+              I grew up in Vancouver, where I fell in love with the mountains,
+              especially skiing and hiking. After spending most of the last
+              decade living and working in Toronto, I've been drawn back to
+              Vancouver, swapping the TTC for the BCMC.
+            </p>
+
+            <p className="py-4">
+              Lately I've been interested in the psychology of learning and
+              metaphysics.
             </p>
           </div>
           <div
